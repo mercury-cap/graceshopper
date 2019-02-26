@@ -15,10 +15,10 @@ const Products = db.define('products', {
     allowNull: false
   },
   type: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.STRING,
     allowNull: false
   },
-  Scoville: {
+  scoville: {
     type: Sequelize.BIGINT,
     allowNull: false,
     validate: {
