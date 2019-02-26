@@ -1,3 +1,6 @@
+# Mercury Cap Team Contract
+See here: https://docs.google.com/document/d/1oj-BBbT-UBaa_dSuCyCWS9nJhkD50IBhZlqhf9v-PiM/edit?usp=sharing
+
 # Boilermaker
 
 _Good things come in pairs_
