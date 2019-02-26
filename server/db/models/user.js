@@ -15,9 +15,6 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
-  birthday: {
-    type: Sequelize.DATE
-  },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
