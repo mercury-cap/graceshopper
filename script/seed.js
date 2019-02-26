@@ -2,10 +2,28 @@
 
 const db = require('../server/db')
 const {User} = require('../server/db/models')
+const {Products} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+
+  const [SrirachaSauce, BravadoSpiceHotSauce] = await Promise.all([
+    Products.create({
+      name: 'Sriracha Sauce',
+      description: 'hot',
+      country: 'USA',
+      type: 'cool',
+      scoville: 1
+    }),
+    Products.create({
+      name: 'Bravado Spice Hot Sauce',
+      description: 'hot',
+      country: 'Somewhere',
+      type: 'cool',
+      scoville: 1
+    })
+  ])
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
