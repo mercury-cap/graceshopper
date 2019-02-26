@@ -11,14 +11,14 @@ const seed = async () => {
       name: 'Sriracha Sauce',
       description: 'hot',
       country: 'USA',
-      type: 'cool',
+      type: 'sauce',
       scoville: 1
     }),
     Products.create({
       name: 'Bravado Spice Hot Sauce',
       description: 'hot',
       country: 'Somewhere',
-      type: 'cool',
+      type: 'dip',
       scoville: 1
     })
   ])
