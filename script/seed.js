@@ -8,29 +8,61 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const [SrirachaSauce, BravadoSpiceHotSauce] = await Promise.all([
+  const products = await Promise.all([
     Products.create({
       name: 'Sriracha Sauce',
       description: 'hot',
       country: 'USA',
       type: 'cool',
-      scoville: 1
+      scoville: 1,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/61SEkIa8mGL._SY679_.jpg',
+      price: 10.99
     }),
     Products.create({
       name: 'Bravado Spice Hot Sauce',
       description: 'hot',
       country: 'Somewhere',
       type: 'cool',
-      scoville: 1
+      scoville: 1,
+      imageUrl:
+        'https://ship.ralphs.com/img/Products/500/Bravado-Spice-Co/Bravado-Spice-Co-Hot-Sauce-Crimson-850771005052.jpg',
+      price: 6.0
     })
   ])
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      name: 'Grace',
+      email: 'gracie@email.com',
+      password: '123',
+      shippingAddress: '1 Hot Sauce Way',
+      shippingCity: 'New York',
+      shippingState: 'New York',
+      shippingZip: '11211',
+      billingAddress: '1 Hot Sauce Way',
+      billingState: 'New York',
+      billingCity: 'New York',
+      billingZip: '11211'
+    }),
+
+    User.create({
+      name: 'Bob',
+      email: 'bobby@email.com',
+      password: '123',
+      shippingAddress: '23 Spicey Court',
+      shippingCity: 'Orlando',
+      shippingState: 'Florida',
+      shippingZip: '11211',
+      billingAddress: '1 Hot Sauce Way',
+      billingState: 'New York',
+      billingCity: 'New York',
+      billingZip: '32789'
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
