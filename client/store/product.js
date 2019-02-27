@@ -31,14 +31,14 @@ export const getSingleProduct = id => {
   }
 }
 
-const initialState = []
+const initialState = {}
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
-      return action.products
+      return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
-      return action.singleProduct
+      return {...state, singleProduct: action.singleProduct}
     default:
       return state
   }
