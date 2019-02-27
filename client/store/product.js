@@ -39,7 +39,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
-      return {...state, products: [...state.products, action.products]}
+      return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
       return {...state, singleProduct: action.product}
     default:
