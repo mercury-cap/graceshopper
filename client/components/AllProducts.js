@@ -15,7 +15,13 @@ class AllProducts extends Component {
         <h1>Products:</h1>
         <div>
           {this.props.products.map(product => (
-            <h2 key={product.name}>{product.name}</h2>
+            <div key={product.name}>
+              <h2>{product.name}</h2>
+              <p>
+                <img src={product.imageUrl} />
+              </p>
+              <p>${product.price}</p>
+            </div>
           ))}
         </div>
       </div>
