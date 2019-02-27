@@ -8,7 +8,7 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const [SrirachaSauce, BravadoSpiceHotSauce] = await Promise.all([
+  const products = await Promise.all([
     Products.create({
       name: 'Sriracha Sauce',
       description: 'hot',
@@ -62,6 +62,7 @@ async function seed() {
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
   console.log(`seeded successfully`)
 }
 
