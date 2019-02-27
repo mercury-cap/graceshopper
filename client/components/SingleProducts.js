@@ -10,8 +10,13 @@ class SingleProduct extends Component {
     console.log(this.props)
     return (
       <div>
-        <p>name: {this.props.product.name}</p>
-        <p>country: </p>
+        <p>Name: {this.props.product.name}</p>
+        <p>Origin: {this.props.product.country}</p>
+        <p>Scoville Heat Units (SHU): {this.props.product.scoville}</p>
+        <p>Product type: {this.props.product.type}</p>
+        <p>Quantity: {this.props.product.quantity}</p>
+        <p>Price: {this.props.product.price}</p>
+        <img src={this.props.product.imageUrl} />
       </div>
     )
   }

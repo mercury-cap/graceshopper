@@ -14,14 +14,20 @@ async function seed() {
       description: 'hot',
       country: 'USA',
       type: 'cool',
-      scoville: 1
+      scoville: 1,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/61SEkIa8mGL._SY679_.jpg',
+      price: 10.99
     }),
     Products.create({
       name: 'Bravado Spice Hot Sauce',
       description: 'hot',
       country: 'Somewhere',
       type: 'cool',
-      scoville: 1
+      scoville: 1,
+      imageUrl:
+        'https://ship.ralphs.com/img/Products/500/Bravado-Spice-Co/Bravado-Spice-Co-Hot-Sauce-Crimson-850771005052.jpg',
+      price: 6.0
     })
   ])
 
