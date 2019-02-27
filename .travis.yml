@@ -16,12 +16,12 @@ install:
 before_script:
   - psql -c 'create database "mercurycap-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: mercury-cap-graceshopper # see README
+  api_key:
+    secure: NuM4cW2SV1e0uGlgKWiKIrglFHg8nMHsE2HCgOfBrCUfFdqX1eX+umsmJhMwJa+EDh7ZsJkV2FTu5ZYh1DJfEmN5mdL0uiOQma3oDOWzS4NDXBZyNZSvc+UYuTM8+hrRJ8ekezx9JoNRHqevOe/bnXzoVoKvLvg/tOv5b/sw+ph1iBrvZHlr8FCuub5iiXMH6D/36ptSmhOj0F+7NDATeNRxd1TAPSIXBlqYlhWKa0uuWRtVTKqhyJxBwfd7ln2W1WgEhoHybEfKsHFv5a6pXynP5lvAql4vyJxFlJp1y06fB7WAUatYu4J67jsCsU7CkpDdwGxyw8AxfPSmK5ezwOq4oTFyNc3EIbPjP6xp8Fq5J6zqDsfY8W/nv8PMMWJIgITB6R2gx+41e6m4DbgJjST9a+A5h7R3+XOjYi1fx+KAs5wstmxY0Wx+Fd4E+LifRHMRUFUBK/6hKi1lGlJdaGEKCBAIQgLkR4znXtFF6vgFJwHwaGv+ULkr9qzOdpRvBvTyRUQv/RKODXb3f+iai8LuNWJ7O9e8XWFqZqWPkJV7mWD7GAw5UAFkRQgZtfGJhu4XNkjx2tKnsiIzdRhdYqV2AK4ea5JhjU8GHK0+fbiRmAFkMTN7fZR4MD27JsU37XoLHz6LUCzIO757rkarV3IuPfaP8OTZk/uoaRCNxy4= # see README
