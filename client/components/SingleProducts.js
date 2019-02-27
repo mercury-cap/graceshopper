@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getSingleProduct} from '../store/product'
+import {getSingleProduct, setSubtotal} from '../store/product'
 
 class SingleProduct extends Component {
   constructor() {
@@ -24,9 +24,9 @@ class SingleProduct extends Component {
   }
 
   handleSubmit = () => {
-    const subtotal = this.state.quantity * this.props.product.price
+    // item {id, quantity, }
+    // handleSubmit must add order subtotal into store so that cart can access
   }
-  // handleSubmit must add order subtotal into store so that cart can access
 
   render() {
     console.log(this.props)
@@ -65,7 +65,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSingleProduct: id => dispatch(getSingleProduct(id))
+    getSingleProduct: id => dispatch(getSingleProduct(id)),
+    setSubtotal: amt => dispatch(setSubtotal(amt))
   }
 }
 
