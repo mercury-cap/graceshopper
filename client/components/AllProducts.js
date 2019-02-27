@@ -14,6 +14,13 @@ class AllProducts extends Component {
       <div>
         <h1>Products:</h1>
         <div>
+          Filter
+          <select>
+            <option>Sauces</option>
+            <option>Sauces</option>
+          </select>
+        </div>
+        <div>
           {this.props.products.map(product => (
             <div key={product.name}>
               <h2>{product.name}</h2>
