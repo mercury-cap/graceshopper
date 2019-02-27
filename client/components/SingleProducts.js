@@ -24,9 +24,9 @@ class SingleProduct extends Component {
   }
 
   handleSubmit = () => {
-    // item {id, quantity, }
-    // handleSubmit must add order subtotal into store so that cart can access
+    const subtotal = this.state.quantity * this.props.product.price
   }
+
 
   render() {
     console.log(this.props)
