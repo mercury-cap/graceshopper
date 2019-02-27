@@ -32,7 +32,8 @@ export const getSingleProduct = id => {
 
 const initialState = {
   products: [],
-  singleProduct: {}
+  singleProduct: {},
+  subtotal: 0
 }
 
 export default function(state = initialState, action) {
