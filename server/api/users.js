@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Orders} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -14,4 +14,20 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+})
+
+router.put('/cart', async (req, res, next) => {
+  const orderInfo = {status: 'in progress'}
+  const [newOrder] = await Orders.findOrCreate({
+    where: {userId: req.user.id},
+    defaults: orderInfo
+  })
+  await newOrder.addProduct(req.body.productId)
+  res.status(200).send(newOrder)
+})
+
+router.get('/cart', (req, res, next) => {
+  req.user.cart
+    ? res.send(req.user.cart)
+    : res.status(404).send('No items in cart')
 })
