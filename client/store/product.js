@@ -2,8 +2,7 @@ import axios from 'axios'
 
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
-const SET_SUBTOTAL = 'SET_SUBTOTAL'
-const SET_CART = 'SET_CART'
+const UPDATE_CART = 'UPDATE_CART'
 
 export const gotAllProducts = products => ({
   type: GET_ALL_PRODUCTS,
@@ -15,14 +14,9 @@ export const getProduct = product => ({
   product
 })
 
-// export const setSubtotal = (subtotal) => ({
-//   type: SET_SUBTOTAL,
-//   subtotal
-// })
-
-export const setCart = cartItems => ({
-  type: SET_CART,
-  cartItems
+const updateCart = item => ({
+  type: UPDATE_CART,
+  item
 })
 
 export const getAllProducts = () => {
@@ -42,6 +36,11 @@ export const getSingleProduct = id => {
   }
 }
 
+export const updateCartInServer = item => async dispatch => {
+  await axios.put('/api/users/cart', item)
+  dispatch(updateCart(item))
+}
+
 const initialState = {
   products: [],
   singleProduct: {},
@@ -54,10 +53,8 @@ export default function(state = initialState, action) {
       return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
       return {...state, singleProduct: action.product}
-    // case SET_SUBTOTAL:
-    //   return {...state, subtotal: action.subtotal}
-    case SET_CART:
-      return {...state, cart: [...state.cart, ...action.cartItems]}
+    case UPDATE_CART:
+      return {...state, cart: [...state.cart, action.item]}
     default:
       return state
   }

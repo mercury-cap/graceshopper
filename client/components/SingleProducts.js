@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getSingleProduct, setSubtotal} from '../store/product'
+import {getSingleProduct, updateCartInServer} from '../store/product'
 
 class SingleProduct extends Component {
   constructor() {
@@ -24,12 +24,15 @@ class SingleProduct extends Component {
   }
 
   handleSubmit = () => {
-    const subtotal = this.state.quantity * this.props.product.price
+    this.props.addToCart({
+      productId: this.props.product.id,
+      productName: this.props.product.name,
+      quantity: this.state.quantity
+    })
   }
 
-
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div id="single-product">
         <img src={this.props.product.imageUrl} />
@@ -68,7 +71,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSingleProduct: id => dispatch(getSingleProduct(id)),
-    setSubtotal: amt => dispatch(setSubtotal(amt))
+    addToCart: item => dispatch(updateCartInServer(item))
   }
 }
 
