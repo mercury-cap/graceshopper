@@ -14,7 +14,16 @@ class AdminClientList extends Component {
 
     const userList = users.length ? (
       users.map(user => {
-        return <div key={user.email}>HEY HEY</div>
+        return (
+          <div key={user.id}>
+            <div>
+              {' '}
+              {user.firstName} {user.lastName}{' '}
+            </div>
+            <p>{user.email}</p>
+            <p>{user.shippingState}</p>
+          </div>
+        )
       })
     ) : (
       <div>
@@ -33,7 +42,7 @@ class AdminClientList extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user
+    user: state.user.users
   }
 }
 

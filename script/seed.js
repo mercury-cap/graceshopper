@@ -99,7 +99,8 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({
-      name: 'Grace',
+      firstName: 'Grace',
+      lastName: 'Hopper',
       email: 'gracie@email.com',
       password: '123',
       shippingAddress: '1 Hot Sauce Way',
@@ -113,17 +114,18 @@ async function seed() {
     }),
 
     User.create({
-      name: 'Bob',
+      firstName: 'Bob',
+      lastName: 'Hatter',
       email: 'bobby@email.com',
       password: '123',
       shippingAddress: '23 Spicey Court',
       shippingCity: 'Orlando',
       shippingState: 'Florida',
       shippingZip: '11211',
-      billingAddress: '1 Hot Sauce Way',
-      billingState: 'New York',
-      billingCity: 'New York',
-      billingZip: '32789'
+      billingAddress: '50 Pepper Rd',
+      billingState: 'Los Angeles',
+      billingCity: 'California',
+      billingZip: '22334'
     })
   ])
 

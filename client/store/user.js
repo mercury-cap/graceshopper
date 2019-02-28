@@ -18,7 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const gotAllUsers = () => ({type: GET_ALL_USERS})
+const gotAllUsers = users => ({type: GET_ALL_USERS, users})
 
 /**
  * THUNK CREATORS
@@ -63,6 +63,7 @@ export const getAllUsers = () => {
     try {
       const response = await axios.get('/api/users')
       const users = response.data
+      console.log(users)
       dispatch(gotAllUsers(users))
     } catch (error) {
       console.log(error)
@@ -80,7 +81,8 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser
     case GET_ALL_USERS:
-      console.log('hi from reducer: ', state)
+      console.log('hi from reducer: ', action.users)
+      console.log('LENGTH', action.users.length)
       return {...state, users: action.users}
     default:
       return state
