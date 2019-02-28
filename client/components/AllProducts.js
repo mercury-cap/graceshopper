@@ -13,7 +13,7 @@ class AllProducts extends Component {
     console.log(products)
     return (
       <div>
-        <h1>Products:</h1>
+        <h3>All Products:</h3>
         <div>
           Filter
           <select>

@@ -34,7 +34,7 @@ class SingleProduct extends Component {
       <div id="single-product">
         <img src={this.props.product.imageUrl} />
         <div id="product-details">
-          <p>Name: {this.props.product.name}</p>
+          <h1>{this.props.product.name}</h1>
           <p>Origin: {this.props.product.country}</p>
           <p>Scoville Heat Units (SHU): {this.props.product.scoville}</p>
           <p>Product type: {this.props.product.type}</p>
