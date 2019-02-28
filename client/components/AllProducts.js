@@ -9,8 +9,8 @@ class AllProducts extends Component {
   }
 
   render() {
-    let products = this.props.products
-    console.log(products)
+    // let products = this.props.products
+    // console.log(products)
     return (
       <div>
         <h3>All Products:</h3>
@@ -23,7 +23,7 @@ class AllProducts extends Component {
         </div>
         <div id="product-list">
           {this.props.products.map(product => (
-            <Link to={`/products/${product.id}`} key={product.name}>
+            <Link to={`/products/${product.id}`} key={product.id}>
               <div className="product">
                 <h2 className="product-name">{product.name}</h2>
                 <p>

@@ -6,10 +6,8 @@ import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import singleProduct from '../client/components/SingleProducts'
 import AllProducts from './components/AllProducts'
+import Cart from './components/cart'
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -26,6 +24,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route path="/products/:id" component={singleProduct} />
+        <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
