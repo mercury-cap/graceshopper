@@ -27,7 +27,9 @@ class SingleProduct extends Component {
     this.props.addToCart({
       productId: this.props.product.id,
       productName: this.props.product.name,
-      quantity: this.state.quantity
+      quantity: this.state.quantity,
+      price: this.props.product.price,
+      imageUrl: this.props.product.imageUrl
     })
     this.props.history.push('/')
   }
