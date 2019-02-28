@@ -6,6 +6,7 @@ import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import singleProduct from '../client/components/SingleProducts'
 import AllProducts from './components/AllProducts'
+import AdminClientList from './components/AdminClientList'
 
 /**
  * COMPONENT
@@ -30,6 +31,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/admin/clients" component={AdminClientList} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

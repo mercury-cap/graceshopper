@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const GET_ALL_USERS = 'GET_ALL_USERS'
 
 /**
  * INITIAL STATE
@@ -17,6 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const gotAllUsers = () => ({type: GET_ALL_USERS})
 
 /**
  * THUNK CREATORS
@@ -56,6 +58,18 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const getAllUsers = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get('/api/users')
+      const users = response.data
+      dispatch(gotAllUsers(users))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -65,6 +79,9 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case GET_ALL_USERS:
+      console.log('hi from reducer: ', state)
+      return {...state, users: action.users}
     default:
       return state
   }
