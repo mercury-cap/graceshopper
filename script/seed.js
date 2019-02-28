@@ -17,7 +17,7 @@ async function seed() {
       scoville: 7500,
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/61SEkIa8mGL._SY679_.jpg',
-      price: 10.99
+      price: 1099
     }),
     Products.create({
       name: 'Bravado Spice Hot Sauce',
@@ -27,7 +27,7 @@ async function seed() {
       scoville: 25000,
       imageUrl:
         'https://ship.ralphs.com/img/Products/500/Bravado-Spice-Co/Bravado-Spice-Co-Hot-Sauce-Crimson-850771005052.jpg',
-      price: 6.0
+      price: 600
     }),
     Products.create({
       name: 'Blair’s Ultra Death Sauce',
@@ -38,7 +38,7 @@ async function seed() {
       scoville: 800000,
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/61VCF68rDFL._SY355_.jpg',
-      price: 9.99
+      price: 999
     }),
     Products.create({
       name: 'El Yucateco Chipotle Hot Sauce',
@@ -49,7 +49,7 @@ async function seed() {
       scoville: 3400,
       imageUrl:
         'https://www.chilliworld.com/content/images/thumbs/0000571_el-yucateco-chipotle-hot-sauce.png',
-      price: 3.49
+      price: 349
     }),
     Products.create({
       name: 'El Yucateco Chipotle Hot Sauce',
@@ -60,7 +60,7 @@ async function seed() {
       scoville: 3400,
       imageUrl:
         'https://www.chilliworld.com/content/images/thumbs/0000571_el-yucateco-chipotle-hot-sauce.png',
-      price: 9.99
+      price: 999
     }),
     Products.create({
       name: 'Harissa Le Phare du Cap Bon',
@@ -71,7 +71,7 @@ async function seed() {
       scoville: 10000,
       imageUrl:
         'https://www.chilliworld.com/content/images/thumbs/0000601_harissa-le-phare-du-cap-bon-70g.png',
-      price: 1.49
+      price: 149
     }),
     Products.create({
       name: 'South Devon Chilli Farm Ghost Chilli Sauce',
@@ -82,7 +82,7 @@ async function seed() {
       scoville: 400000,
       imageUrl:
         'https://www.chilliworld.com/content/images/thumbs/0000829_south-devon-chilli-farm-ghost-chilli-sauce.jpeg',
-      price: 5.49
+      price: 549
     }),
     Products.create({
       name: 'South Devon Chilli Farm Ghost Chilli Sauce',
@@ -93,7 +93,7 @@ async function seed() {
       scoville: 400000,
       imageUrl:
         'https://www.chilliworld.com/content/images/thumbs/0000829_south-devon-chilli-farm-ghost-chilli-sauce.jpeg',
-      price: 5.49
+      price: 549
     })
   ])
 

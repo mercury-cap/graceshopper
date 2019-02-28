@@ -33,7 +33,7 @@ const Products = db.define('products', {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrWo94en5Si-Q-JX3gD04xF9U2GX566SEyIjLz6Kw0t4S0JiNx'
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       min: 0

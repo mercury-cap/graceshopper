@@ -29,7 +29,9 @@ class AllProducts extends Component {
                 <p>
                   <img className="product-img" src={product.imageUrl} />
                 </p>
-                <p className="product-price">${product.price}</p>
+                <p className="product-price">
+                  ${(product.price / 100).toFixed(2)}
+                </p>
               </div>
             </Link>
           ))}
