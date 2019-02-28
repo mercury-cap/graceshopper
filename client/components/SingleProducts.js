@@ -29,6 +29,7 @@ class SingleProduct extends Component {
       productName: this.props.product.name,
       quantity: this.state.quantity
     })
+    this.props.history.push('/')
   }
 
   render() {
