@@ -7,6 +7,9 @@ const Orders = db.define('orders', {
   },
   status: {
     type: Sequelize.STRING
+  },
+  sessionId: {
+    type: Sequelize.STRING
   }
 })
 
