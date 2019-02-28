@@ -13,8 +13,8 @@ async function seed() {
       name: 'Sriracha Sauce',
       description: 'hot',
       country: 'USA',
-      type: 'cool',
-      scoville: 1,
+      type: 'Hot sauce',
+      scoville: 7500,
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/61SEkIa8mGL._SY679_.jpg',
       price: 10.99
@@ -22,12 +22,78 @@ async function seed() {
     Products.create({
       name: 'Bravado Spice Hot Sauce',
       description: 'hot',
-      country: 'Somewhere',
-      type: 'cool',
-      scoville: 1,
+      country: 'USA',
+      type: 'Hot sauce',
+      scoville: 25000,
       imageUrl:
         'https://ship.ralphs.com/img/Products/500/Bravado-Spice-Co/Bravado-Spice-Co-Hot-Sauce-Crimson-850771005052.jpg',
       price: 6.0
+    }),
+    Products.create({
+      name: 'Blair’s Ultra Death Sauce',
+      description:
+        'This frightening sauce is 900 times hotter than a jalapeño.',
+      country: 'Somewhere',
+      type: 'Super hot sauce',
+      scoville: 800000,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/61VCF68rDFL._SY355_.jpg',
+      price: 9.99
+    }),
+    Products.create({
+      name: 'El Yucateco Chipotle Hot Sauce',
+      description:
+        'It is ideal to accompany any kind of meals, especially Fast Food as Pizzas, Hot-Dogs, Tacos and Snacks.',
+      country: 'Mexico',
+      type: 'Hot sauce',
+      scoville: 3400,
+      imageUrl:
+        'https://www.chilliworld.com/content/images/thumbs/0000571_el-yucateco-chipotle-hot-sauce.png',
+      price: 3.49
+    }),
+    Products.create({
+      name: 'El Yucateco Chipotle Hot Sauce',
+      description:
+        'It is ideal to accompany any kind of meals, especially Fast Food as Pizzas, Hot-Dogs, Tacos and Snacks.',
+      country: 'Mexico',
+      type: 'Hot sauce',
+      scoville: 3400,
+      imageUrl:
+        'https://www.chilliworld.com/content/images/thumbs/0000571_el-yucateco-chipotle-hot-sauce.png',
+      price: 9.99
+    }),
+    Products.create({
+      name: 'Harissa Le Phare du Cap Bon',
+      description:
+        'Chilli paste in a Tube! Gives your dishes that authentic North African flavour and comes in very handy packaging for the travellers out there.',
+      country: 'Tunisia',
+      type: 'Chili paste',
+      scoville: 10000,
+      imageUrl:
+        'https://www.chilliworld.com/content/images/thumbs/0000601_harissa-le-phare-du-cap-bon-70g.png',
+      price: 1.49
+    }),
+    Products.create({
+      name: 'South Devon Chilli Farm Ghost Chilli Sauce',
+      description:
+        'Handle with care! This sauce is so hot it comes in a 50ml bottle. One drop goes a long way so take it easy!',
+      country: 'United Kingdom',
+      type: 'Chili paste',
+      scoville: 400000,
+      imageUrl:
+        'https://www.chilliworld.com/content/images/thumbs/0000829_south-devon-chilli-farm-ghost-chilli-sauce.jpeg',
+      price: 5.49
+    }),
+    Products.create({
+      name: 'South Devon Chilli Farm Ghost Chilli Sauce',
+      description:
+        'Handle with care! This sauce is so hot it comes in a 50ml bottle. One drop goes a long way so take it easy!',
+      country: 'United Kingdom',
+      type: 'Chili paste',
+      scoville: 400000,
+      imageUrl:
+        'https://www.chilliworld.com/content/images/thumbs/0000829_south-devon-chilli-farm-ghost-chilli-sauce.jpeg',
+      price: 5.49
     })
   ])
 
