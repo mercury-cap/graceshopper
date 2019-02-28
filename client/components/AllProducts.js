@@ -29,7 +29,7 @@ class AllProducts extends Component {
                 <p>
                   <img className="product-img" src={product.imageUrl} />
                 </p>
-                <p>${product.price}</p>
+                <p className="product-price">${product.price}</p>
               </div>
             </Link>
           ))}

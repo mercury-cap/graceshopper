@@ -17,12 +17,16 @@ router.get('/', async (req, res, next) => {
 })
 
 router.put('/cart', async (req, res, next) => {
+  console.log('req.user.id: ', req.user.id)
+
   const orderInfo = {status: 'in progress'}
   const [newOrder] = await Orders.findOrCreate({
     where: {userId: req.user.id},
     defaults: orderInfo
   })
-  await newOrder.addProduct(req.body.productId)
+  await newOrder.addProduct(req.body.productId, {
+    through: {quantity: req.body.quantity}
+  })
   res.status(200).send(newOrder)
 })
 
