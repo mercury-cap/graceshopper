@@ -7,6 +7,7 @@ import {me} from './store'
 import singleProduct from '../client/components/SingleProducts'
 import AllProducts from './components/AllProducts'
 import Cart from './components/cart'
+import UserProfile from './components/UserProfile'
 
 class Routes extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/profile/:id" component={UserProfile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
