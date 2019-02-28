@@ -10,8 +10,6 @@ class AdminClientList extends Component {
   render() {
     let users = this.props.user || []
 
-    console.log(users)
-
     const userList = users.length ? (
       users.map(user => {
         return (
