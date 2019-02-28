@@ -6,7 +6,7 @@ class SingleProduct extends Component {
   constructor() {
     super()
     this.state = {
-      quantity: 0
+      quantity: 1
     }
   }
 
@@ -42,7 +42,7 @@ class SingleProduct extends Component {
           <p>Origin: {this.props.product.country}</p>
           <p>Scoville Heat Units (SHU): {this.props.product.scoville}</p>
           <p>Product type: {this.props.product.type}</p>
-          <p>Price: {`$${this.props.product.price}`}</p>
+          <p>Price: {`$${(this.props.product.price / 100).toFixed(2)}`}</p>
           <p>Quantity: {this.state.quantity}</p>
           <button type="button" onClick={this.add}>
             +
