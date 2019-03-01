@@ -21,6 +21,7 @@ class Cart extends Component {
     console.log(this.props)
     return (
       <div>
+
         <div id="basket">
           <h2>Your items</h2>
           {this.state.items.length ? (
