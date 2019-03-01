@@ -89,11 +89,31 @@ async function seed() {
       description:
         'This will run you down and stick its horn in ya like the wild beast Rhino.',
       country: 'USA',
-      type: 'Chili paste',
+      type: 'Hot sauce',
       scoville: 5000,
       imageUrl:
         'https://cdn11.bigcommerce.com/s-cb3kf/images/stencil/900x1800/products/781/2352/Rhino_mild__36385.1513129544.png?c=2',
       price: 800
+    }),
+    Products.create({
+      name: 'Amazon Chipotle Hot Sauce',
+      description: 'Amazing hot sauce',
+      country: 'Colombia',
+      type: 'Hot sauce',
+      scoville: 25000,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/31tT904TinL._SX355_.jpg',
+      price: 449
+    }),
+    Products.create({
+      name: 'Zulu Zulu Xtra Hot Hot Sauce',
+      description: 'This Xtra Hot sauce is made from all natural ingredients',
+      country: 'South Africa',
+      type: 'Hot sauce',
+      scoville: 125000,
+      imageUrl:
+        'https://cdn11.bigcommerce.com/s-qqb56hyrha/images/stencil/500x659/products/2462/5335/1562__10704.1516006923.jpg',
+      price: 695
     })
   ])
 
