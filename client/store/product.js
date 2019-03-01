@@ -26,10 +26,10 @@ const gotCartItems = items => ({
   items
 })
 
-const removeItem = items => ({
-  type: REMOVE_ITEM,
-  items
-})
+// const removeItem = items => ({
+//   type: REMOVE_ITEM,
+//   items
+// })
 
 export const getAllProducts = () => {
   return async dispatch => {
@@ -60,13 +60,13 @@ export const getCartItems = () => {
   }
 }
 
-export const removeItem = () => {
-  return async dispatch => {
-    const response = await axios.destroy('/api/users/cart')
-    const singleProduct = response.data
-    dispatch(gotCartItems(items))
-  }
-}
+// export const removeItem = () => {
+//   return async dispatch => {
+//     const response = await axios.destroy('/api/users/cart')
+//     const singleProduct = response.data
+//     dispatch(gotCartItems(items))
+//   }
+// }
 
 const initialState = {
   products: [],
