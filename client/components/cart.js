@@ -18,7 +18,6 @@ class Cart extends Component {
   handleSubmit = () => {}
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <div id="basket">

@@ -35,7 +35,6 @@ class SingleProduct extends Component {
   }
 
   render() {
-    // console.log(this.props)
     return (
       <div id="single-product">
         <img src={this.props.product.imageUrl} />
