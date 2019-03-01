@@ -7,17 +7,22 @@ class Checkout extends Component {
     super(props)
     this.state = {
       items: [],
-      subtotal: 0
+      subtotal: 0,
+      tax: 0,
+      shipping: 300
     }
     this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount = async () => {
     await this.props.getCartItems()
+    const subtotal = this.props.items.reduce(
+      (sum, item) => sum + item.price * item.order_items.quantity,
+      0
+    )
     this.setState({
       items: this.props.items,
-      subtotal: (
-        this.props.items.reduce((sum, item) => sum + item.price, 0) / 100
-      ).toFixed(2)
+      subtotal: subtotal,
+      tax: subtotal * 0.08875
     })
   }
 
@@ -28,20 +33,50 @@ class Checkout extends Component {
   render() {
     return (
       <div>
-        <h1>ORDER SUMMARY</h1>
-        <div id="checkout-items">
-          {this.state.items.map(item => (
-            <div id="checkout-single-item" key={item.id}>
-              <p>{item.name}</p>
-              <p>${(item.price / 100).toFixed(2)}</p>
-            </div>
-          ))}
-          <h3>Total before tax:</h3>
-          <p>${this.state.subtotal}</p>
-          <h3>Tax:</h3>
-          <h1>Order Total</h1>
-        </div>
-
+        <h3>Order Summary</h3>
+        <table id="checkout-items">
+          <tbody>
+            {this.state.items.map(item => (
+              <tr id="checkout-single-item" key={item.id}>
+                <td>
+                  {item.name} ({item.order_items.quantity})
+                </td>
+                <td>
+                  ${(item.price * item.order_items.quantity / 100).toFixed(2)}
+                </td>
+              </tr>
+            ))}
+            <tr>
+              <td>
+                <h4>Subtotal</h4>
+              </td>
+              <td>
+                <h4>${(this.state.subtotal / 100).toFixed(2)}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>Shipping & Handling</td>
+              <td>${(this.state.shipping / 100).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Tax</td>
+              <td>${(this.state.tax / 100).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>
+                <h3>Order Total</h3>
+              </td>
+              <td>
+                <h3>
+                  ${(
+                    (this.state.subtotal + 300 + this.state.tax) /
+                    100
+                  ).toFixed(2)}
+                </h3>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <button type="submit" onClick={this.handleClick}>
           Place Your Order
         </button>
