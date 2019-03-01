@@ -21,19 +21,24 @@ class Cart extends Component {
     console.log(this.props)
     return (
       <div>
-        <h1>Your items</h1>
-        {this.state.items.length ? (
-          this.state.items.map(item => (
-            <div key={item.id}>
-              <h3>{item.productName}</h3>
-              <img src={item.imageUrl} />
-              <p>${(item.price / 100).toFixed(2)}</p>
-              <p>{item.quantity}</p>
-            </div>
-          ))
-        ) : (
-          <p>Your cart is empty!</p>
-        )}
+        <div id="basket">
+          <h2>Your items</h2>
+          {this.state.items.length ? (
+            this.state.items.map(item => (
+              <div key={item.id}>
+                <h3>{item.productName}</h3>
+                <img src={item.imageUrl} />
+                <p>${(item.price / 100).toFixed(2)}</p>
+                <p>{item.quantity}</p>
+              </div>
+            ))
+          ) : (
+            <p>Your cart is empty!</p>
+          )}
+        </div>
+        <div id="order-summary">
+          <h2>Summary</h2>
+        </div>
       </div>
     )
   }
