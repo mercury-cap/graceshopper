@@ -28,8 +28,8 @@ router.get('/', async (req, res, next) => {
 router.put('/cart', async (req, res, next) => {
   const userId = req.user ? req.user.id : null
   const findQuery = req.user
-    ? {userId: req.user.id}
-    : {sessionId: req.session.id}
+    ? {userId: req.user.id, status: 'in progress'}
+    : {sessionId: req.session.id, status: 'in progress'}
   const orderInfo = {status: 'in progress', userId: userId}
 
   try {
