@@ -7,6 +7,7 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const GET_ALL_USERS = 'GET_ALL_USERS'
+const GOT_CART_ITEMS = 'GOT_CART_ITEMS'
 
 /**
  * INITIAL STATE
@@ -19,6 +20,7 @@ const defaultUser = {}
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 const gotAllUsers = users => ({type: GET_ALL_USERS, users})
+const gotCartItems = () => ({type: GOT_CART_ITEMS, items})
 
 /**
  * THUNK CREATORS
@@ -71,6 +73,15 @@ export const getAllUsers = () => {
   }
 }
 
+// export const getCartItems = () => {
+//   return async dispatch => {
+//     const {data: items} = await axios.get('/api/users/cart')
+//     items.map(item => {
+//       return
+//     })
+//     dispatch()
+//   }
+// }
 /**
  * REDUCER
  */
