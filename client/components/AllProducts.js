@@ -15,12 +15,13 @@ class AllProducts extends Component {
       return (
         <div className="col s12 m6 l3" key={product.id}>
           <div className="card small">
-            <div className="card-image small">
+            <div className="card-image">
               <img src={product.imageUrl} />
             </div>
             <div className="card-content">
-              <NavLink to={`/products/${product.id}`} />
-              <h5 className="indigo-text">{product.name}</h5>
+              <NavLink to={`/products/${product.id}`}>
+                <h5 className="orange-text">{product.name}</h5>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -30,7 +31,7 @@ class AllProducts extends Component {
     return (
       <div>
         <div>
-          Filter
+          <p>Filter</p>
           <select>
             <option>Sauces</option>
             <option>Sauces</option>
