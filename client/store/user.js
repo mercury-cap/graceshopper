@@ -63,7 +63,6 @@ export const getAllUsers = () => {
     try {
       const response = await axios.get('/api/users')
       const users = response.data
-      console.log(users)
       dispatch(gotAllUsers(users))
     } catch (error) {
       console.log(error)
