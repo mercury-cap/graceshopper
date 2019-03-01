@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllProducts} from '../store/product'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 class AllProducts extends Component {
   componentDidMount() {
@@ -9,11 +9,26 @@ class AllProducts extends Component {
   }
 
   render() {
-    // let products = this.props.products
-    // console.log(products)
+    const productList = this.props.products || []
+
+    const productCard = productList.map(product => {
+      return (
+        <div className="col s12 m6 l3" key={product.id}>
+          <div className="card small">
+            <div className="card-image small">
+              <img src={product.imageUrl} />
+            </div>
+            <div className="card-content">
+              <NavLink to={`/products/${product.id}`} />
+              <h5 className="indigo-text">{product.name}</h5>
+            </div>
+          </div>
+        </div>
+      )
+    })
+
     return (
       <div>
-        <h3>All Products:</h3>
         <div>
           Filter
           <select>
@@ -21,20 +36,11 @@ class AllProducts extends Component {
             <option>Sauces</option>
           </select>
         </div>
-        <div id="product-list">
-          {this.props.products.map(product => (
-            <Link to={`/products/${product.id}`} key={product.id}>
-              <div className="product">
-                <h2 className="product-name">{product.name}</h2>
-                <p>
-                  <img className="product-img" src={product.imageUrl} />
-                </p>
-                <p className="product-price">
-                  ${(product.price / 100).toFixed(2)}
-                </p>
-              </div>
-            </Link>
-          ))}
+
+        <div className="container">
+          <div className="row">
+            {productCard.length ? productCard : <p>No product</p>}
+          </div>
         </div>
       </div>
     )
