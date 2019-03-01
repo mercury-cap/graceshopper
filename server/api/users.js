@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User, Orders, Products, OrderItems} = require('../db/models')
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -80,7 +81,6 @@ router.get('/cart', async (req, res, next) => {
         }
       ]
     })
-
     res.json(cart.products)
   } catch (error) {
     next(error)

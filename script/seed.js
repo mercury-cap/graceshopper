@@ -52,15 +52,15 @@ async function seed() {
       price: 349
     }),
     Products.create({
-      name: 'El Yucateco Chipotle Hot Sauce',
+      name: 'Tabasco',
       description:
-        'It is ideal to accompany any kind of meals, especially Fast Food as Pizzas, Hot-Dogs, Tacos and Snacks.',
-      country: 'Mexico',
-      type: 'Hot sauce',
-      scoville: 3400,
+        'The original and famous bottle sold in more than 185 countries today.',
+      country: 'USA',
+      type: 'Hot Sauce',
+      scoville: 3000,
       imageUrl:
-        'https://www.chilliworld.com/content/images/thumbs/0000571_el-yucateco-chipotle-hot-sauce.png',
-      price: 999
+        'https://images-na.ssl-images-amazon.com/images/I/41evj6emeKL.jpg',
+      price: 263
     }),
     Products.create({
       name: 'Harissa Le Phare du Cap Bon',
@@ -85,15 +85,35 @@ async function seed() {
       price: 549
     }),
     Products.create({
-      name: 'South Devon Chilli Farm Ghost Chilli Sauce',
+      name: 'African Rhino Peri-Peri Mild Sauce',
       description:
-        'Handle with care! This sauce is so hot it comes in a 50ml bottle. One drop goes a long way so take it easy!',
-      country: 'United Kingdom',
-      type: 'Chili paste',
-      scoville: 400000,
+        'This will run you down and stick its horn in ya like the wild beast Rhino.',
+      country: 'USA',
+      type: 'Hot sauce',
+      scoville: 5000,
       imageUrl:
-        'https://www.chilliworld.com/content/images/thumbs/0000829_south-devon-chilli-farm-ghost-chilli-sauce.jpeg',
-      price: 549
+        'https://cdn11.bigcommerce.com/s-cb3kf/images/stencil/900x1800/products/781/2352/Rhino_mild__36385.1513129544.png?c=2',
+      price: 800
+    }),
+    Products.create({
+      name: 'Amazon Chipotle Hot Sauce',
+      description: 'Amazing hot sauce',
+      country: 'Colombia',
+      type: 'Hot sauce',
+      scoville: 25000,
+      imageUrl:
+        'https://images-na.ssl-images-amazon.com/images/I/31tT904TinL._SX355_.jpg',
+      price: 449
+    }),
+    Products.create({
+      name: 'Zulu Zulu Xtra Hot Hot Sauce',
+      description: 'This Xtra Hot sauce is made from all natural ingredients',
+      country: 'South Africa',
+      type: 'Hot sauce',
+      scoville: 125000,
+      imageUrl:
+        'https://cdn11.bigcommerce.com/s-qqb56hyrha/images/stencil/500x659/products/2462/5335/1562__10704.1516006923.jpg',
+      price: 695
     })
   ])
 
