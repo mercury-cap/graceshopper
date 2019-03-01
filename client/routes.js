@@ -8,6 +8,7 @@ import singleProduct from '../client/components/SingleProducts'
 import AllProducts from './components/AllProducts'
 import AdminClientList from './components/AdminClientList'
 import Cart from './components/cart'
+import Checkout from './components/Checkout'
 
 class Routes extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route path="/products/:id" component={singleProduct} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

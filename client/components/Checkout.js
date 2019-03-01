@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 class Checkout extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {}
     this.handleClick = this.handleClick.bind(this)
   }
@@ -13,7 +13,7 @@ class Checkout extends Component {
   }
 
   render() {
-    console.log(this.props.items)
+    console.log('Items:', this.props.items)
     return (
       <div>
         <h1>ORDER SUMMARY</h1>

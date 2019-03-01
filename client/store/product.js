@@ -3,6 +3,7 @@ import axios from 'axios'
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const UPDATE_CART = 'UPDATE_CART'
+const GOT_CART_ITEMS = 'GOT_CART_ITEMS'
 
 export const gotAllProducts = products => ({
   type: GET_ALL_PRODUCTS,
@@ -17,6 +18,11 @@ export const getProduct = product => ({
 const updateCart = item => ({
   type: UPDATE_CART,
   item
+})
+
+const gotCartItems = items => ({
+  type: GOT_CART_ITEMS,
+  items
 })
 
 export const getAllProducts = () => {
@@ -41,6 +47,13 @@ export const updateCartInServer = item => async dispatch => {
   dispatch(updateCart(item))
 }
 
+export const getCartItems = () => {
+  return async dispatch => {
+    const {data: items} = await axios.get('/api/users/cart')
+    dispatch(gotCartItems(items))
+  }
+}
+
 const initialState = {
   products: [],
   singleProduct: {},
@@ -55,6 +68,8 @@ export default function(state = initialState, action) {
       return {...state, singleProduct: action.product}
     case UPDATE_CART:
       return {...state, cart: [...state.cart, action.item]}
+    case GOT_CART_ITEMS:
+      return {...state, cart: action.items}
     default:
       return state
   }
