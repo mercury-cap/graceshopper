@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Orders} = require('../db/models')
+const {User, Orders, Products} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -54,8 +54,20 @@ router.put('/cart', async (req, res, next) => {
   }
 })
 
-router.get('/cart', (req, res, next) => {
-  req.user.cart
-    ? res.send(req.user.cart)
-    : res.status(404).send('No items in cart')
+router.get('/cart', async (req, res, next) => {
+  try {
+    const cart = await Orders.findOne({
+      where: {sessionId: req.session.id},
+      include: [
+        {
+          model: Products,
+          attributes: ['id', 'name', 'price', 'imageUrl']
+        }
+      ]
+    })
+    // const items = await cart.getProducts()
+    res.json(cart.products)
+  } catch (error) {
+    next(error)
+  }
 })
