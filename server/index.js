@@ -44,6 +44,9 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
 
+  // for Stripe
+  // app.set('view engine', 'pug')
+
   // body parsing middleware
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))
