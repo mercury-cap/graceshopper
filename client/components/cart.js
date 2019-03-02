@@ -18,26 +18,36 @@ class Cart extends Component {
   handleSubmit = () => {}
 
   render() {
+    const itemsList = this.state.items.length ? (
+      this.state.items.map(item => (
+        <tr Key={item.id}>
+          <td>{item.name}</td>
+          <td>
+            <p>${(item.price / 100).toFixed(2)}</p>
+          </td>
+          <td>
+            <p>{item.order_items.quantity}</p>
+          </td>
+        </tr>
+      ))
+    ) : (
+      <p>Your cart is empty!</p>
+    )
+
     return (
-      <div>
-        <div id="basket">
-          <h2>Your items</h2>
-          {this.state.items.length ? (
-            this.state.items.map(item => (
-              <div key={item.id}>
-                <h3>{item.productName}</h3>
-                <img src={item.imageUrl} />
-                <p>${(item.price / 100).toFixed(2)}</p>
-                <p>Quantity: {item.order_items.quantity}</p>
-              </div>
-            ))
-          ) : (
-            <p>Your cart is empty!</p>
-          )}
-        </div>
-        <div id="order-summary">
-          <h2>Summary</h2>
-        </div>
+      <div className="container">
+        <h2>Your items</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Item Price</th>
+              <th>Item Quantity</th>
+            </tr>
+          </thead>
+
+          <tbody>{itemsList}</tbody>
+        </table>
       </div>
     )
   }
