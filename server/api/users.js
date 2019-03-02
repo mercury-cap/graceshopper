@@ -26,13 +26,13 @@ router.get('/', async (req, res, next) => {
 })
 
 function isAuthenticated(req, res, next) {
-  if (req.user.authenticated) {
+  if (req.user) {
     return next()
   }
   res.redirect('/')
 }
 
-router.put('/cart', isAuthenticated, async (req, res, next) => {
+router.put('/cart', async (req, res, next) => {
   const userId = req.user ? req.user.id : null
 
   const orderInfo = {status: 'in progress', userId: userId}
