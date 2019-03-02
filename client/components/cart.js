@@ -28,7 +28,7 @@ class Cart extends Component {
                 <h3>{item.productName}</h3>
                 <img src={item.imageUrl} />
                 <p>${(item.price / 100).toFixed(2)}</p>
-                <p>{item.quantity}</p>
+                <p>Quantity: {item.order_items.quantity}</p>
               </div>
             ))
           ) : (
