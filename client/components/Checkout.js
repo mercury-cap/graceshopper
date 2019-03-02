@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getCartItems} from '../store/product'
+import CheckoutForm from './CheckoutForm'
 
 class Checkout extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Checkout extends Component {
     this.setState({
       items: this.props.items,
       subtotal: subtotal,
-      tax: subtotal * 0.08875
+      tax: Math.floor(subtotal * 0.08875)
     })
   }
 
@@ -31,55 +32,52 @@ class Checkout extends Component {
   }
 
   render() {
+    const {items, subtotal, tax, shipping} = this.state
+
     return (
-      <div>
-        <h3>Order Summary</h3>
-        <table id="checkout-items">
-          <tbody>
-            {this.state.items.map(item => (
-              <tr id="checkout-single-item" key={item.id}>
+      <div id="checkout">
+        <div id="order-summary">
+          <h3>Order Summary</h3>
+          <table id="checkout-items">
+            <tbody>
+              {items.map(item => (
+                <tr id="checkout-single-item" key={item.id}>
+                  <td>
+                    {item.name} ({item.order_items.quantity})
+                  </td>
+                  <td>
+                    ${(item.price * item.order_items.quantity / 100).toFixed(2)}
+                  </td>
+                </tr>
+              ))}
+              <tr>
                 <td>
-                  {item.name} ({item.order_items.quantity})
+                  <b>Subtotal</b>
                 </td>
                 <td>
-                  ${(item.price * item.order_items.quantity / 100).toFixed(2)}
+                  <h4>${(subtotal / 100).toFixed(2)}</h4>
                 </td>
               </tr>
-            ))}
-            <tr>
-              <td>
-                <h4>Subtotal</h4>
-              </td>
-              <td>
-                <h4>${(this.state.subtotal / 100).toFixed(2)}</h4>
-              </td>
-            </tr>
-            <tr>
-              <td>Shipping & Handling</td>
-              <td>${(this.state.shipping / 100).toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td>Tax</td>
-              <td>${(this.state.tax / 100).toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td>
-                <h3>Order Total</h3>
-              </td>
-              <td>
-                <h3>
-                  ${(
-                    (this.state.subtotal + 300 + this.state.tax) /
-                    100
-                  ).toFixed(2)}
-                </h3>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button type="submit" onClick={this.handleClick}>
-          Place Your Order
-        </button>
+              <tr>
+                <td>Shipping & Handling</td>
+                <td>${(shipping / 100).toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td>${(tax / 100).toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td>
+                  <h3>Order Total</h3>
+                </td>
+                <td>
+                  <h3>${((subtotal + shipping + tax) / 100).toFixed(2)}</h3>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <CheckoutForm total={subtotal + shipping + tax} />
+        </div>
       </div>
     )
   }
