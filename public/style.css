@@ -102,3 +102,16 @@ form div {
   padding: 15px;
   border-radius: 1em;
 }
+
+/* checkout */
+/* 
+#checkout-items {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+#checkout-single-item {
+  display: flex;
+} */
