@@ -44,20 +44,26 @@ class SingleProduct extends Component {
           <p>Scoville Heat Units (SHU): {this.props.product.scoville}</p>
           <p>Product type: {this.props.product.type}</p>
           <p>Price: {`$${(this.props.product.price / 100).toFixed(2)}`}</p>
-          <p>Quantity: {this.state.quantity}</p>
-          <button type="button" onClick={this.add}>
-            +
-          </button>
-          <button
-            type="button"
-            onClick={this.subtract}
-            disabled={this.state.quantity === 0}
-          >
-            -
-          </button>
-          <button type="submit" onClick={this.handleSubmit}>
-            Add to Cart
-          </button>
+          <div>
+            <span>Quantity: {this.state.quantity}</span>
+            <span>
+              <button type="button" onClick={this.add}>
+                +
+              </button>
+              <button
+                type="button"
+                onClick={this.subtract}
+                disabled={this.state.quantity === 0}
+              >
+                -
+              </button>
+            </span>
+          </div>
+          <div>
+            <button type="submit" onClick={this.handleSubmit}>
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     )

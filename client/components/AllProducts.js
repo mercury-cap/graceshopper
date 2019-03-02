@@ -25,10 +25,10 @@ class AllProducts extends Component {
           {this.props.products.map(product => (
             <Link to={`/products/${product.id}`} key={product.id}>
               <div className="product">
-                <h2 className="product-name">{product.name}</h2>
-                <p>
+                <div>
                   <img className="product-img" src={product.imageUrl} />
-                </p>
+                </div>
+                <h3 className="product-name">{product.name}</h3>
                 <p className="product-price">
                   ${(product.price / 100).toFixed(2)}
                 </p>
