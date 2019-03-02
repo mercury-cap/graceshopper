@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const SECRET_KEY = 'sk_test_fAHI4k5tSM1hlR7CWwJi5CKt'
+const SECRET_KEY = process.env.SECRET_KEY
 const stripe = require('stripe')(SECRET_KEY)
 module.exports = router
 
