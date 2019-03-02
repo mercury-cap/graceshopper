@@ -29,6 +29,7 @@ class Cart extends Component {
                 <img src={item.imageUrl} />
                 <p>${(item.price / 100).toFixed(2)}</p>
                 <p>{item.quantity}</p>
+                <button type="submit">REMOVE</button>
               </div>
             ))
           ) : (
