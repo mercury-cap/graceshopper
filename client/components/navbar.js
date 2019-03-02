@@ -15,15 +15,19 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <ul id="nav-mobile" className="right hide-on-med-and-down black">
             {/* The navbar will show these links after you log in */}
             <li>
-              <Link to="/home">Home</Link>
+              <Link to="/home">
+                <i className="material-icons prefix">person</i>
+              </Link>
+            </li>
+            <li>
+              <Link to="/cart">
+                <i className="material-icons prefix">shopping_cart</i>
+              </Link>
             </li>
             <li>
               <a href="#" onClick={handleClick}>
                 Logout
               </a>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
             </li>
           </ul>
         ) : (

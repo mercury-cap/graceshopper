@@ -10,6 +10,7 @@ class AllProducts extends Component {
 
   render() {
     const productList = this.props.products || []
+    console.log(this.props)
 
     const productCard = productList.map(product => {
       return (
@@ -20,7 +21,7 @@ class AllProducts extends Component {
             </div>
             <div className="card-content">
               <NavLink to={`/products/${product.id}`}>
-                <h5 className="orange-text">{product.name}</h5>
+                <div className="orange-text">{product.name}</div>
               </NavLink>
             </div>
           </div>
