@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getCartItems} from '../store/product'
-// import {Elements} from 'react-stripe-elements'
-// import CheckoutForm from './CheckoutForm_elem'
 import CheckoutForm from './CheckoutForm'
 
 class Checkout extends Component {
@@ -25,7 +23,7 @@ class Checkout extends Component {
     this.setState({
       items: this.props.items,
       subtotal: subtotal,
-      tax: subtotal * 0.08875
+      tax: Math.floor(subtotal * 0.08875)
     })
   }
 

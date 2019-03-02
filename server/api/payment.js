@@ -1,35 +1,12 @@
 const router = require('express').Router()
-const keyPublishable = process.env.PUBLISHABLE_KEY
-const keySecret = process.env.SECRET_KEY
-const stripe = require('stripe')(keySecret)
+const SECRET_KEY = 'sk_test_fAHI4k5tSM1hlR7CWwJi5CKt'
+const stripe = require('stripe')(SECRET_KEY)
 module.exports = router
 
-router.get('/', (req, res, next) => {
-  try {
-    res.render('index.pug', keyPublishable)
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.post('/charge', async (req, res, next) => {
-  let amount = 500
-
-  try {
-    const customer = await stripe.customers.create({
-      email: req.body.stripeEmail,
-      source: req.body.stripeToken
-    })
-
-    await stripe.charges.create({
-      amount,
-      description: 'Sample Charge',
-      currency: 'usd',
-      customer: customer.id
-    })
-
-    res.render('charge.pug')
-  } catch (error) {
-    next(error)
-  }
+router.post('/', (req, res, next) => {
+  stripe.charges.create(req.body, (stripeErr, stripeRes) => {
+    stripeErr
+      ? res.status(500).send({error: stripeErr})
+      : res.status(200).send({success: stripeRes})
+  })
 })
