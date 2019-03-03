@@ -6,3 +6,9 @@
 div.section {
   padding: 0px;
 }
+
+.brand-logo img {
+  max-height: 50px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
