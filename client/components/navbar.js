@@ -28,17 +28,17 @@ class Navbar extends Component {
                   </Link>
                 </li>
                 <li>
-                  <a href="#" onClick={handleClick}>
-                    Logout
-                  </a>
-                </li>
-                <li>
                   <Link to="/cart">
-                    <i className="material-icons prefix">shopping_cart</i>
+                    <i className="material-icons left prefix white-text">
+                      shopping_cart
+                    </i>
+                    <span>{cart.length}</span>
                   </Link>
                 </li>
                 <li>
-                  <span>{cart.length}</span>
+                  <a href="#" onClick={handleClick}>
+                    Logout
+                  </a>
                 </li>
               </ul>
             ) : (
