@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
 import {getCartItems, removeItem} from '../store/product'
 
 class Cart extends Component {
@@ -14,7 +13,6 @@ class Cart extends Component {
 
   componentDidMount = async () => {
     await this.props.getCartItems()
-    // this.setState({items: this.props.items})
   }
 
   handleSubmit = event => {
@@ -68,4 +66,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
