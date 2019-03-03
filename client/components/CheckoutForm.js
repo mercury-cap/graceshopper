@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 import Axios from 'axios'
 
@@ -13,7 +13,7 @@ const errorMsg = () => {
   alert('Payment error')
 }
 
-const onToken = amount => async token => {
+const onToken = (amount, clearCart) => async token => {
   try {
     await Axios.post('/api/payment/', {
       source: token.id,
@@ -21,18 +21,23 @@ const onToken = amount => async token => {
       currency: CURRENCY
     })
     successMsg()
+    clearCart()
   } catch (error) {
     errorMsg()
   }
 }
 
-const CheckoutForm = ({total}) => (
-  <StripeCheckout
-    amount={total}
-    token={onToken(total)}
-    currency={CURRENCY}
-    stripeKey={PUBLISHABLE_KEY}
-  />
-)
-
+class CheckoutForm extends Component {
+  render() {
+    const {total, clearCart} = this.props
+    return (
+      <StripeCheckout
+        amount={total}
+        token={onToken(total, clearCart)}
+        currency={CURRENCY}
+        stripeKey={PUBLISHABLE_KEY}
+      />
+    )
+  }
+}
 export default CheckoutForm

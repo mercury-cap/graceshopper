@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCartItems} from '../store/product'
+import {getCartItems, completeCheckout} from '../store/product'
 import CheckoutForm from './CheckoutForm'
 import CheckoutSummary from './CheckoutSummary'
 
@@ -35,7 +35,10 @@ class Checkout extends Component {
         <div id="order-summary">
           <h3>Order Summary</h3>
           <CheckoutSummary {...this.state} />
-          <CheckoutForm total={subtotal + shipping + tax} />
+          <CheckoutForm
+            total={subtotal + shipping + tax}
+            clearCart={this.props.clearCart}
+          />
         </div>
       </div>
     )
@@ -47,7 +50,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCartItems: () => dispatch(getCartItems())
+  getCartItems: () => dispatch(getCartItems()),
+  clearCart: () => dispatch(completeCheckout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
