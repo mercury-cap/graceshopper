@@ -63,7 +63,6 @@ export const getCartItems = () => {
 export const removeItem = itemId => {
   return async dispatch => {
     await axios.delete(`/api/users/cart/${itemId}`, itemId)
-    console.log('hi', itemId)
     dispatch(removedItem(itemId))
   }
 }
@@ -84,12 +83,13 @@ export default function(state = initialState, action) {
       return {...state, cart: [...state.cart, action.item]}
     case GOT_CART_ITEMS:
       return {...state, cart: action.items}
-    case REMOVE_ITEM:
+    case REMOVE_ITEM: {
       const currentCart = [...state.cart]
       const filteredCart = currentCart.filter(item => {
         return item.id !== Number(action.itemId)
       })
       return {...state, cart: filteredCart}
+    }
     default:
       return state
   }

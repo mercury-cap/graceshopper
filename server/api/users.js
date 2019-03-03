@@ -118,7 +118,6 @@ router.delete('/cart/:id', async (req, res, next) => {
     const order = await Orders.findOne({
       where: findQuery
     })
-    console.log(req.params.id)
     await OrderItems.destroy({
       where: {
         orderId: order.id,
