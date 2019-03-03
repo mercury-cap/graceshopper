@@ -10,7 +10,7 @@ class Checkout extends Component {
       items: [],
       subtotal: 0,
       tax: 0,
-      shipping: 300
+      shipping: 0
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -23,7 +23,8 @@ class Checkout extends Component {
     this.setState({
       items: this.props.items,
       subtotal: subtotal,
-      tax: Math.floor(subtotal * 0.08875)
+      tax: Math.floor(subtotal * 0.08875),
+      shipping: this.props.items.length ? 300 : 0
     })
   }
 
