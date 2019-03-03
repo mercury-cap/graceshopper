@@ -1,5 +1,4 @@
 import React from 'react'
-import CheckoutForm from './CheckoutForm'
 
 const CheckoutSummary = ({items, subtotal, tax, shipping}) => {
   return (

@@ -10,3 +10,12 @@ div.section {
 a {
   color: white;
 }
+
+.input-field input:focus + label {
+  color: orange !important;
+}
+
+.row .input-field input:focus {
+  border-bottom: 1px solid orange !important;
+  box-shadow: 0 1px 0 0 orange !important;
+}

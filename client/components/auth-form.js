@@ -12,7 +12,7 @@ const AuthForm = props => {
   return (
     <div className="container">
       <div className="row">
-        <form className="col s12" onSubmit={handleSubmit} name={name}>
+        <form onSubmit={handleSubmit} name={name}>
           <div className="row">
             <div className="input-field col s6">
               <input
