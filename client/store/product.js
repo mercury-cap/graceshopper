@@ -1,12 +1,13 @@
 import axios from 'axios'
 
-const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+const GOT_ALL_PRODUCTS = 'GOT_ALL_PRODUCTS'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const UPDATE_CART = 'UPDATE_CART'
 const GOT_CART_ITEMS = 'GOT_CART_ITEMS'
+const COMPLETED_CHECKOUT = 'COMPLETED_CHECKOUT'
 
 export const gotAllProducts = products => ({
-  type: GET_ALL_PRODUCTS,
+  type: GOT_ALL_PRODUCTS,
   products
 })
 
@@ -20,9 +21,14 @@ const updateCart = item => ({
   item
 })
 
-const gotCartItems = items => ({
+const gotCartItems = cart => ({
   type: GOT_CART_ITEMS,
-  items
+  cartId: cart.id,
+  items: cart.products
+})
+
+const completedCheckout = () => ({
+  type: COMPLETED_CHECKOUT
 })
 
 export const getAllProducts = () => {
@@ -49,27 +55,35 @@ export const updateCartInServer = item => async dispatch => {
 
 export const getCartItems = () => {
   return async dispatch => {
-    const {data: items} = await axios.get('/api/users/cart')
-    dispatch(gotCartItems(items))
+    const {data: cart} = await axios.get('/api/users/cart')
+    if (cart) dispatch(gotCartItems(cart))
   }
+}
+
+export const completeCheckout = (cartId, amt) => async dispatch => {
+  await axios.put(`/api/payment/${cartId}`, {amt})
+  dispatch(completedCheckout())
 }
 
 const initialState = {
   products: [],
   singleProduct: {},
-  cart: []
+  cart: [],
+  cartId: 0
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_ALL_PRODUCTS:
+    case GOT_ALL_PRODUCTS:
       return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
       return {...state, singleProduct: action.product}
     case UPDATE_CART:
       return {...state, cart: [...state.cart, action.item]}
     case GOT_CART_ITEMS:
-      return {...state, cart: action.items}
+      return {...state, cart: action.items, cartId: action.cartId}
+    case COMPLETED_CHECKOUT:
+      return {...state, cart: initialState.cart, cartId: initialState.cartId}
     default:
       return state
   }
