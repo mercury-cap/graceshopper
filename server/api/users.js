@@ -104,7 +104,7 @@ router.get('/cart', async (req, res, next) => {
       })
     }
 
-    res.json(cart.products)
+    res.json(cart)
   } catch (error) {
     next(error)
   }
