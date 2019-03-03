@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCartItems} from '../store/product'
+import axios from 'axios'
+import {getCartItems, completeCheckout} from '../store/product'
 import CheckoutForm from './CheckoutForm'
+import CheckoutSummary from './CheckoutSummary'
 
 class Checkout extends Component {
   constructor(props) {
@@ -10,10 +12,10 @@ class Checkout extends Component {
       items: [],
       subtotal: 0,
       tax: 0,
-      shipping: 300
+      shipping: 0
     }
-    this.handleClick = this.handleClick.bind(this)
   }
+
   componentDidMount = async () => {
     await this.props.getCartItems()
     const subtotal = this.props.items.reduce(
@@ -23,60 +25,39 @@ class Checkout extends Component {
     this.setState({
       items: this.props.items,
       subtotal: subtotal,
-      tax: Math.floor(subtotal * 0.08875)
+      tax: Math.floor(subtotal * 0.08875),
+      shipping: this.props.items.length ? 300 : 0
     })
   }
 
-  handleClick = () => {
-    console.log('HELLOOO BUTTON')
+  onToken = (amount, clearCart, cartId) => async token => {
+    try {
+      await axios.post('/api/payment/', {
+        source: token.id,
+        amount: amount,
+        currency: 'USD'
+      })
+      clearCart(cartId, amount)
+      alert('Payment successful!')
+      this.props.history.push('/')
+    } catch (error) {
+      alert('Payment error')
+    }
   }
 
   render() {
-    const {items, subtotal, tax, shipping} = this.state
-
+    const {subtotal, tax, shipping} = this.state
     return (
       <div id="checkout">
         <div id="order-summary">
           <h3>Order Summary</h3>
-          <table id="checkout-items">
-            <tbody>
-              {items.map(item => (
-                <tr id="checkout-single-item" key={item.id}>
-                  <td>
-                    {item.name} ({item.order_items.quantity})
-                  </td>
-                  <td>
-                    ${(item.price * item.order_items.quantity / 100).toFixed(2)}
-                  </td>
-                </tr>
-              ))}
-              <tr>
-                <td>
-                  <b>Subtotal</b>
-                </td>
-                <td>
-                  <h4>${(subtotal / 100).toFixed(2)}</h4>
-                </td>
-              </tr>
-              <tr>
-                <td>Shipping & Handling</td>
-                <td>${(shipping / 100).toFixed(2)}</td>
-              </tr>
-              <tr>
-                <td>Tax</td>
-                <td>${(tax / 100).toFixed(2)}</td>
-              </tr>
-              <tr>
-                <td>
-                  <h3>Order Total</h3>
-                </td>
-                <td>
-                  <h3>${((subtotal + shipping + tax) / 100).toFixed(2)}</h3>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <CheckoutForm total={subtotal + shipping + tax} />
+          <CheckoutSummary {...this.state} />
+          <CheckoutForm
+            total={subtotal + shipping + tax}
+            clearCart={this.props.clearCart}
+            cartId={this.props.cartId}
+            onToken={this.onToken}
+          />
         </div>
       </div>
     )
@@ -84,11 +65,13 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = state => ({
-  items: state.product.cart
+  items: state.product.cart,
+  cartId: state.product.cartId
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCartItems: () => dispatch(getCartItems())
+  getCartItems: () => dispatch(getCartItems()),
+  clearCart: (id, amt) => dispatch(completeCheckout(id, amt))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

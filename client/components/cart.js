@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getCartItems} from '../store/product'
 
 class Cart extends Component {
@@ -20,18 +21,16 @@ class Cart extends Component {
   render() {
     const itemsList = this.state.items.length ? (
       this.state.items.map(item => (
-        <tr Key={item.id}>
+        <tr key={item.id}>
           <td>{item.name}</td>
-          <td>
-            <p>${(item.price / 100).toFixed(2)}</p>
-          </td>
-          <td>
-            <p>{item.order_items.quantity}</p>
-          </td>
+          <td>${(item.price / 100).toFixed(2)}</td>
+          <td>{item.order_items.quantity}</td>
         </tr>
       ))
     ) : (
-      <p>Your cart is empty!</p>
+      <tr>
+        <td>Your cart is empty!</td>
+      </tr>
     )
 
     return (
@@ -48,6 +47,16 @@ class Cart extends Component {
 
           <tbody>{itemsList}</tbody>
         </table>
+        {this.state.items.length ? (
+          <Link to="/checkout">
+            <button
+              className="waves-effect waves-light amber darken-4 btn"
+              type="submit"
+            >
+              Proceed to checkout
+            </button>
+          </Link>
+        ) : null}
       </div>
     )
   }
