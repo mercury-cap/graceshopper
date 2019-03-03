@@ -3,20 +3,6 @@
   max-height: 200px;
 }
 
-/* checkout */
-/* 
-#checkout-items {
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-}
-
-#checkout-single-item {
-  display: flex;
-} */
-
-#checkout {
-  display: flex;
-  justify-content: space-evenly;
+div.section {
+  padding: 0px;
 }

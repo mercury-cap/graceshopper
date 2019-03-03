@@ -48,10 +48,9 @@ class Checkout extends Component {
   render() {
     const {subtotal, tax, shipping} = this.state
     return (
-      <div id="checkout">
-        <div id="order-summary">
-          <h3>Order Summary</h3>
-          <CheckoutSummary {...this.state} />
+      <div>
+        <CheckoutSummary {...this.state} />
+        <div className="center-align">
           <CheckoutForm
             total={subtotal + shipping + tax}
             clearCart={this.props.clearCart}
@@ -59,6 +58,7 @@ class Checkout extends Component {
             onToken={this.onToken}
           />
         </div>
+        <div className="row" />
       </div>
     )
   }
