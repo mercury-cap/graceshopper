@@ -75,8 +75,8 @@ router.put('/cart', async (req, res, next) => {
 
 router.get('/cart', async (req, res, next) => {
   const findQuery = req.user
-    ? {userId: req.user.id}
-    : {sessionId: req.session.id}
+    ? {userId: req.user.id, status: 'in progress'}
+    : {sessionId: req.session.id, status: 'in progress'}
 
   try {
     const cart = await Orders.findOne({
@@ -88,7 +88,7 @@ router.get('/cart', async (req, res, next) => {
         }
       ]
     })
-    res.json(cart.products)
+    res.json(cart)
   } catch (error) {
     next(error)
   }

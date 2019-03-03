@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Orders, Products, OrderItems} = require('../db/models')
+const {Orders} = require('../db/models')
 const SECRET_KEY = process.env.SECRET_KEY
 const stripe = require('stripe')(SECRET_KEY)
 module.exports = router
@@ -12,8 +12,12 @@ router.post('/', (req, res, next) => {
   })
 })
 
-router.delete('/', (req, res, next) => {
-  console.log('INSIDE DELETE /api/payment')
-  // Orders.findOne({where: })
-  res.sendStatus(200)
+router.put('/:cartId', async (req, res, next) => {
+  try {
+    const cart = await Orders.findById(req.params.cartId)
+    await cart.update({status: 'complete', total: req.body.amt})
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
+  }
 })

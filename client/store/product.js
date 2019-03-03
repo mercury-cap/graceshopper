@@ -21,9 +21,10 @@ const updateCart = item => ({
   item
 })
 
-const gotCartItems = items => ({
+const gotCartItems = cart => ({
   type: GOT_CART_ITEMS,
-  items
+  cartId: cart.id,
+  items: cart.products
 })
 
 const completedCheckout = () => ({
@@ -54,20 +55,21 @@ export const updateCartInServer = item => async dispatch => {
 
 export const getCartItems = () => {
   return async dispatch => {
-    const {data: items} = await axios.get('/api/users/cart')
-    dispatch(gotCartItems(items))
+    const {data: cart} = await axios.get('/api/users/cart')
+    if (cart) dispatch(gotCartItems(cart))
   }
 }
 
-export const completeCheckout = () => async dispatch => {
-  await axios.delete('/api/payment')
+export const completeCheckout = (cartId, amt) => async dispatch => {
+  await axios.put(`/api/payment/${cartId}`, {amt})
   dispatch(completedCheckout())
 }
 
 const initialState = {
   products: [],
   singleProduct: {},
-  cart: []
+  cart: [],
+  cartId: 0
 }
 
 export default function(state = initialState, action) {
@@ -79,9 +81,9 @@ export default function(state = initialState, action) {
     case UPDATE_CART:
       return {...state, cart: [...state.cart, action.item]}
     case GOT_CART_ITEMS:
-      return {...state, cart: action.items}
+      return {...state, cart: action.items, cartId: action.cartId}
     case COMPLETED_CHECKOUT:
-      return {...state, cart: initialState.cart}
+      return {...state, cart: initialState.cart, cartId: initialState.cartId}
     default:
       return state
   }

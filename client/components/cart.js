@@ -20,18 +20,16 @@ class Cart extends Component {
   render() {
     const itemsList = this.state.items.length ? (
       this.state.items.map(item => (
-        <tr Key={item.id}>
+        <tr key={item.id}>
           <td>{item.name}</td>
-          <td>
-            <p>${(item.price / 100).toFixed(2)}</p>
-          </td>
-          <td>
-            <p>{item.order_items.quantity}</p>
-          </td>
+          <td>${(item.price / 100).toFixed(2)}</td>
+          <td>{item.order_items.quantity}</td>
         </tr>
       ))
     ) : (
-      <p>Your cart is empty!</p>
+      <tr>
+        <td>Your cart is empty!</td>
+      </tr>
     )
 
     return (

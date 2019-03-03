@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import axios from 'axios'
 import {getCartItems, completeCheckout} from '../store/product'
 import CheckoutForm from './CheckoutForm'
 import CheckoutSummary from './CheckoutSummary'
@@ -11,7 +12,7 @@ class Checkout extends Component {
       items: [],
       subtotal: 0,
       tax: 0,
-      shipping: 300
+      shipping: 0
     }
   }
 
@@ -24,8 +25,23 @@ class Checkout extends Component {
     this.setState({
       items: this.props.items,
       subtotal: subtotal,
-      tax: Math.floor(subtotal * 0.08875)
+      tax: Math.floor(subtotal * 0.08875),
+      shipping: this.props.items.length ? 300 : 0
     })
+  }
+
+  onToken = (amount, clearCart, cartId) => async token => {
+    try {
+      await axios.post('/api/payment/', {
+        source: token.id,
+        amount: amount,
+        currency: 'USD'
+      })
+      clearCart(cartId, amount)
+      alert('Payment successful!')
+    } catch (error) {
+      alert('Payment error')
+    }
   }
 
   render() {
@@ -38,6 +54,8 @@ class Checkout extends Component {
           <CheckoutForm
             total={subtotal + shipping + tax}
             clearCart={this.props.clearCart}
+            cartId={this.props.cartId}
+            onToken={this.onToken}
           />
         </div>
       </div>
@@ -46,12 +64,13 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = state => ({
-  items: state.product.cart
+  items: state.product.cart,
+  cartId: state.product.cartId
 })
 
 const mapDispatchToProps = dispatch => ({
   getCartItems: () => dispatch(getCartItems()),
-  clearCart: () => dispatch(completeCheckout())
+  clearCart: (id, amt) => dispatch(completeCheckout(id, amt))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
