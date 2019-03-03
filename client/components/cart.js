@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import {getCartItems, removeItem} from '../store/product'
 
 class Cart extends Component {
@@ -13,18 +14,12 @@ class Cart extends Component {
 
   componentDidMount = async () => {
     await this.props.getCartItems()
-    this.setState({items: this.props.items})
+    // this.setState({items: this.props.items})
   }
 
   handleSubmit = event => {
     const itemId = event.target.value
-    const itemToDelete = this.state.items.filter(
-      item => item.id === Number(itemId)
-    )
-    console.log('Remove', itemToDelete)
-    this.props.deleteItem(itemToDelete)
-    this.setState({items: this.props.items})
-    console.log(this.state)
+    this.props.deleteItem(itemId)
   }
 
   render() {
@@ -32,8 +27,8 @@ class Cart extends Component {
       <div>
         <div id="basket">
           <h2>Your items</h2>
-          {this.state.items.length ? (
-            this.state.items.map(item => (
+          {this.props.items.length ? (
+            this.props.items.map(item => (
               <div key={item.id}>
                 <h3>{item.productName}</h3>
                 <img src={item.imageUrl} />
@@ -69,8 +64,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getCartItems: () => dispatch(getCartItems()),
-    deleteItem: item => dispatch(removeItem(item))
+    deleteItem: itemId => dispatch(removeItem(itemId))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))

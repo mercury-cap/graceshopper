@@ -26,9 +26,9 @@ const gotCartItems = items => ({
   items
 })
 
-const removedItem = item => ({
+const removedItem = itemId => ({
   type: REMOVE_ITEM,
-  item: item[0]
+  itemId
 })
 
 export const getAllProducts = () => {
@@ -60,11 +60,11 @@ export const getCartItems = () => {
   }
 }
 
-export const removeItem = item => {
+export const removeItem = itemId => {
   return async dispatch => {
-    await axios.delete('/api/users/cart', item)
-    console.log('hi', item)
-    dispatch(removedItem(item))
+    await axios.delete(`/api/users/cart/${itemId}`, itemId)
+    console.log('hi', itemId)
+    dispatch(removedItem(itemId))
   }
 }
 
@@ -87,7 +87,7 @@ export default function(state = initialState, action) {
     case REMOVE_ITEM:
       const currentCart = [...state.cart]
       const filteredCart = currentCart.filter(item => {
-        return item.id !== Number(action.item.id)
+        return item.id !== Number(action.itemId)
       })
       return {...state, cart: filteredCart}
     default:
