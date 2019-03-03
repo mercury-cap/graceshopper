@@ -37,6 +37,9 @@ class Navbar extends Component {
                     <i className="material-icons prefix">shopping_cart</i>
                   </Link>
                 </li>
+                <li>
+                  <span>{cart.length}</span>
+                </li>
               </ul>
             ) : (
               <ul id="nav-mobile" className="right hide-on-med-and-down black">
