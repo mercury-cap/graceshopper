@@ -38,7 +38,6 @@ router.put('/cart', async (req, res, next) => {
       where: findQuery,
       defaults: orderInfo
     })
-
     if (!wasCreated) {
       await order.update({userId: userId})
     }
@@ -96,7 +95,7 @@ router.delete('/cart', async (req, res, next) => {
     const order = await Orders.findOne({
       where: findQuery
     })
-
+    console.log(req.body)
     await OrderItems.destroy({
       where: {
         orderId: order.id,
@@ -104,7 +103,7 @@ router.delete('/cart', async (req, res, next) => {
       }
     })
 
-    res.status(410).end()
+    res.status(204).end()
   } catch (err) {
     next(err)
   }

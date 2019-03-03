@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCartItems} from '../store/product'
+import {getCartItems, removeItem} from '../store/product'
 
 class Cart extends Component {
   constructor() {
@@ -8,6 +8,7 @@ class Cart extends Component {
     this.state = {
       items: []
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount = async () => {
@@ -15,7 +16,16 @@ class Cart extends Component {
     this.setState({items: this.props.items})
   }
 
-  handleSubmit = () => {}
+  handleSubmit = event => {
+    const itemId = event.target.value
+    const itemToDelete = this.state.items.filter(
+      item => item.id === Number(itemId)
+    )
+    console.log('Remove', itemToDelete)
+    this.props.deleteItem(itemToDelete)
+    this.setState({items: this.props.items})
+    console.log(this.state)
+  }
 
   render() {
     return (
@@ -29,7 +39,13 @@ class Cart extends Component {
                 <img src={item.imageUrl} />
                 <p>${(item.price / 100).toFixed(2)}</p>
                 <p>{item.quantity}</p>
-                <button type="submit">REMOVE</button>
+                <button
+                  type="submit"
+                  onClick={this.handleSubmit}
+                  value={item.id}
+                >
+                  REMOVE
+                </button>
               </div>
             ))
           ) : (
@@ -52,7 +68,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCartItems: () => dispatch(getCartItems())
+    getCartItems: () => dispatch(getCartItems()),
+    deleteItem: item => dispatch(removeItem(item))
   }
 }
 
