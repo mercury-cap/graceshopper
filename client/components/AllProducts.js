@@ -4,13 +4,42 @@ import {getAllProducts} from '../store/product'
 import {NavLink} from 'react-router-dom'
 
 class AllProducts extends Component {
+  constructor() {
+    super()
+    this.state = {
+      heat: 'all'
+    }
+  }
+
   componentDidMount() {
     this.props.getProducts()
   }
 
+  handleHeatChange = e => {
+    this.setState({
+      heat: e.target.value
+    })
+  }
+
   render() {
-    const productList = this.props.products || []
-    console.log(this.props)
+    const getHeat = scoville => {
+      if (scoville <= 10000) {
+        return 'mild'
+      } else if (scoville <= 50000) {
+        return 'hot'
+      } else {
+        return 'insane'
+      }
+    }
+
+    let productList = this.props.products || []
+    const {heat} = this.state
+
+    if (heat !== 'all') {
+      productList = productList.filter(
+        product => getHeat(product.scoville) === heat
+      )
+    }
 
     const productCard = productList.map(product => {
       return (
@@ -31,11 +60,13 @@ class AllProducts extends Component {
 
     return (
       <div>
-        <div>
-          <p>Filter</p>
-          <select>
-            <option>Sauces</option>
-            <option>Sauces</option>
+        <div className="container">
+          <p>Select your heat</p>
+          <select onChange={this.handleHeatChange} className="browser-default">
+            <option value="all">All</option>
+            <option value="mild">Mild</option>
+            <option value="hot">Hot</option>
+            <option value="insane">Insane</option>
           </select>
         </div>
 
