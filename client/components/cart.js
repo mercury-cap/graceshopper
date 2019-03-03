@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getCartItems} from '../store/product'
 
 class Cart extends Component {
@@ -46,6 +47,16 @@ class Cart extends Component {
 
           <tbody>{itemsList}</tbody>
         </table>
+        {this.state.items.length ? (
+          <Link to="/checkout">
+            <button
+              className="waves-effect waves-light amber darken-4 btn"
+              type="submit"
+            >
+              Proceed to checkout
+            </button>
+          </Link>
+        ) : null}
       </div>
     )
   }

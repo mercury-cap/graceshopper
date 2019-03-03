@@ -39,6 +39,7 @@ class Checkout extends Component {
       })
       clearCart(cartId, amount)
       alert('Payment successful!')
+      this.props.history.push('/')
     } catch (error) {
       alert('Payment error')
     }
