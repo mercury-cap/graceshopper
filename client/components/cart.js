@@ -14,7 +14,7 @@ class Cart extends Component {
 
   componentDidMount = async () => {
     await this.props.getCartItems()
-    this.setState({items: this.props.items})
+    // this.setState({items: this.props.items})
   }
 
   // remove = async event => {
@@ -25,12 +25,12 @@ class Cart extends Component {
 
   render() {
     console.log('PROPS: ', this.props)
-    const itemsList = this.state.items.length ? (
-      this.state.items.map(item => (
+    const itemsList = this.props.items.length ? (
+      this.props.items.map(item => (
         <tr key={item.id}>
           <td>{item.name}</td>
           <td>${(item.price / 100).toFixed(2)}</td>
-          <td>{item.order_items.quantity}</td>
+          <td>{item.order_items ? item.order_items.quantity : 1}</td>
           <td>
             <button
               type="submit"
