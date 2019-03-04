@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import {getCartItems, removeItem} from '../store/product'
 
 class Cart extends Component {
@@ -9,7 +9,7 @@ class Cart extends Component {
     this.state = {
       items: []
     }
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount = async () => {
@@ -17,11 +17,12 @@ class Cart extends Component {
     this.setState({items: this.props.items})
   }
 
-  // remove = async event => {
-  //   const itemId = event.target.value
-  //   await this.props.deleteItem(itemId)
-  //   await this.props.getCartItems()
-  // }
+  handleSubmit = event => {
+    const itemId = event.target.value
+    this.props.deleteItem(itemId)
+    this.setState({items: this.props.items})
+    // await this.props.getCartItems()
+  }
 
   render() {
     console.log('PROPS: ', this.props)
@@ -32,11 +33,7 @@ class Cart extends Component {
           <td>${(item.price / 100).toFixed(2)}</td>
           <td>{item.order_items.quantity}</td>
           <td>
-            <button
-              type="submit"
-              onClick={() => this.props.deleteItem(item.id)}
-              value={item.id}
-            >
+            <button type="submit" onClick={this.handleSubmit} value={item.id}>
               REMOVE
             </button>
           </td>
@@ -87,4 +84,4 @@ const mapDispatchToProps = dispatch => ({
   deleteItem: itemId => dispatch(removeItem(itemId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))
