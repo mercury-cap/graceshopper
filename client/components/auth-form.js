@@ -10,31 +10,50 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div className="row">
-      <form className="col s12" onSubmit={handleSubmit} name={name}>
-        <div className="row">
-          <div className="input-field col s6">
-            <input name="email" type="text" id="email" />
-            <label htmlFor="email">Email</label>
+    <div className="container">
+      <div className="row">
+        <form onSubmit={handleSubmit} name={name}>
+          <div className="row">
+            <div className="input-field col s6">
+              <input
+                name="email"
+                type="email"
+                id="email"
+                className="validate"
+              />
+              <label htmlFor="email">Email</label>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="input-field col s6">
-            <input name="password" type="password" id="password" />
-            <label htmlFor="password">Password</label>
+          <div className="row">
+            <div className="input-field col s6">
+              <input name="password" type="password" id="password" />
+              <label htmlFor="password">Password</label>
+            </div>
           </div>
-        </div>
-        <div>
-          <button
-            className="waves-effect waves-light amber darken-4 btn"
-            type="submit"
-          >
-            {displayName}
-          </button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+
+          <div className="row">
+            <div className="col s3 orange-text">
+              <button
+                className="waves-effect waves-light amber darken-4 btn"
+                type="submit"
+              >
+                {displayName}
+              </button>
+              {error && error.response && <div> {error.response.data} </div>}
+            </div>
+            <div className="col s3 orange-text">
+              <button
+                type="submit"
+                className="waves-effect waves-light amber darken-4 btn"
+              >
+                <div>
+                  <a href="/auth/google">{displayName} with Google</a>
+                </div>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
