@@ -3,7 +3,7 @@ const {User, Orders, Products, OrderItems} = require('../db/models')
 
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', isAuthenticated, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
 })
 
 function isAuthenticated(req, res, next) {
-  if (req.user) {
+  if (req.user && req.user.isAdmin === true) {
     return next()
   }
   res.redirect('/')
