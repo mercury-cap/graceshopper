@@ -65,6 +65,7 @@ router.put('/cart', async (req, res, next) => {
     let order = await Orders.findOne({
       where: {sessionId: req.session.id, status: 'in progress'}
     })
+
     if (!order && req.user) {
       order = await Orders.findOne({where: {userId, status: 'in progress'}})
     }
@@ -107,5 +108,27 @@ router.get('/cart', async (req, res, next) => {
     res.json(cart)
   } catch (error) {
     next(error)
+  }
+})
+
+router.delete('/cart/:id', async (req, res, next) => {
+  const findQuery = req.user
+    ? {userId: req.user.id, status: 'in progress'}
+    : {sessionId: req.session.id, status: 'in progress'}
+
+  try {
+    const order = await Orders.findOne({
+      where: findQuery
+    })
+    await OrderItems.destroy({
+      where: {
+        orderId: order.id,
+        productId: req.params.id
+      }
+    })
+
+    res.status(204).end()
+  } catch (err) {
+    next(err)
   }
 })

@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getCartItems} from '../store/product'
+import {getCartItems, removeItem} from '../store/product'
+
 
 class Cart extends Component {
   constructor() {
@@ -9,22 +10,32 @@ class Cart extends Component {
     this.state = {
       items: []
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount = async () => {
     await this.props.getCartItems()
-    this.setState({items: this.props.items})
   }
 
-  handleSubmit = () => {}
+  handleSubmit = event => {
+    const itemId = event.target.value
+    this.props.deleteItem(itemId)
+  }
 
   render() {
-    const itemsList = this.state.items.length ? (
-      this.state.items.map(item => (
+    const itemsList = this.props.items.length ? (
+      this.props.items.map(item => (
         <tr key={item.id}>
           <td>{item.name}</td>
           <td>${(item.price / 100).toFixed(2)}</td>
           <td>{item.order_items.quantity}</td>
+         <td><button
+            type="submit"
+            onClick={this.handleSubmit}
+            value={item.id}
+            >
+            REMOVE
+            </button></td>
         </tr>
       ))
     ) : (
@@ -42,12 +53,13 @@ class Cart extends Component {
               <th>Item Name</th>
               <th>Item Price</th>
               <th>Item Quantity</th>
+              <th>Remove<th>
             </tr>
           </thead>
 
           <tbody>{itemsList}</tbody>
         </table>
-        {this.state.items.length ? (
+        {this.props.items.length ? (
           <Link to="/checkout">
             <button
               className="waves-effect waves-light amber darken-4 btn"
@@ -70,7 +82,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCartItems: () => dispatch(getCartItems())
+    getCartItems: () => dispatch(getCartItems()),
+    deleteItem: itemId => dispatch(removeItem(itemId))
   }
 }
 
