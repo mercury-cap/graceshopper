@@ -66,7 +66,6 @@ export const getCartItems = () => {
   }
 }
 
-
 export const removeItem = itemId => {
   return async dispatch => {
     await axios.delete(`/api/users/cart/${itemId}`, itemId)
@@ -77,6 +76,10 @@ export const removeItem = itemId => {
 export const completeCheckout = (cartId, amt) => async dispatch => {
   await axios.put(`/api/payment/${cartId}`, {amt})
   dispatch(completedCheckout())
+}
+
+export const updateQuantity = (quantity, itemId) => async () => {
+  await axios.put(`/api/users/cart/${itemId}`, {quantity})
 }
 
 const initialState = {
@@ -102,9 +105,11 @@ export default function(state = initialState, action) {
         return item.id !== Number(action.itemId)
       })
       return {...state, cart: filteredCart}
-    }      
+    }
     case COMPLETED_CHECKOUT:
       return {...state, cart: initialState.cart, cartId: initialState.cartId}
+    // case UPDATE_QUANTITY:
+    //   return {...state, cart: [...state.cart]}
     default:
       return state
   }

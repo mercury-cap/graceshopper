@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getCartItems, removeItem} from '../store/product'
+import {getCartItems, removeItem, updateQuantity} from '../store/product'
 
 class Cart extends Component {
   constructor() {
@@ -9,28 +9,45 @@ class Cart extends Component {
     this.state = {
       items: []
     }
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount = async () => {
     await this.props.getCartItems()
-    // this.setState({items: this.props.items})
   }
 
-  // remove = async event => {
-  //   const itemId = event.target.value
-  //   await this.props.deleteItem(itemId)
-  //   await this.props.getCartItems()
-  // }
+  handleChange = event => {
+    const newQuantity = event.target.value
+    const itemId = event.target.name
+    this.props.updateQuantity(newQuantity, itemId)
+  }
 
   render() {
-    console.log('PROPS: ', this.props)
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const itemsList = this.props.items.length ? (
       this.props.items.map(item => (
         <tr key={item.id}>
           <td>{item.name}</td>
           <td>${(item.price / 100).toFixed(2)}</td>
-          <td>{item.order_items ? item.order_items.quantity : 1}</td>
+          <td>
+            <select
+              onChange={this.handleChange}
+              name={item.id}
+              className="browser-default"
+            >
+              {numbers.map(
+                number =>
+                  number !==
+                  (item.order_items ? item.order_items.quantity : 1) ? (
+                    <option>{number}</option>
+                  ) : (
+                    <option selected>
+                      {item.order_items ? item.order_items.quantity : 1}
+                    </option>
+                  )
+              )}
+            </select>
+          </td>
           <td>
             <button
               type="submit"
@@ -63,7 +80,7 @@ class Cart extends Component {
 
           <tbody>{itemsList}</tbody>
         </table>
-        {this.state.items.length ? (
+        {this.props.items.length ? (
           <Link to="/checkout">
             <button
               className="waves-effect waves-light amber darken-4 btn"
@@ -84,7 +101,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCartItems: () => dispatch(getCartItems()),
-  deleteItem: itemId => dispatch(removeItem(itemId))
+  deleteItem: itemId => dispatch(removeItem(itemId)),
+  updateQuantity: (quantity, itemId) =>
+    dispatch(updateQuantity(quantity, itemId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
