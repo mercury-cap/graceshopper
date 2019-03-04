@@ -38,16 +38,17 @@ class Cart extends Component {
               name={item.id}
               className="browser-default"
             >
-              <option selected>
-                {item.order_items ? item.order_items.quantity : 1}
-              </option>
-              {numbers
-                .filter(
-                  number =>
-                    number !==
-                    (item.order_items ? item.order_items.quantity : 1)
-                )
-                .map(num => <option key={num}>{num}</option>)}
+              {numbers.map(
+                number =>
+                  number !==
+                  (item.order_items ? item.order_items.quantity : 1) ? (
+                    <option>{number}</option>
+                  ) : (
+                    <option selected>
+                      {item.order_items ? item.order_items.quantity : 1}
+                    </option>
+                  )
+              )}
             </select>
           </td>
           <td>
