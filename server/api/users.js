@@ -150,10 +150,10 @@ router.put('/cart/:id', async (req, res, next) => {
     })
 
     const updatedItem = await item.update({
-      quanity: req.body.quanity
+      quantity: req.body.quantity
     })
 
-    res.status(200).end(updatedItem)
+    res.status(200).send(updatedItem)
   } catch (err) {
     next(err)
   }
