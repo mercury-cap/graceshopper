@@ -18,15 +18,12 @@ class Cart extends Component {
 
   handleChange = event => {
     const newQuantity = event.target.value
-
     const itemId = event.target.name
-    console.log('Second', itemId)
     this.props.updateQuantity(newQuantity, itemId)
   }
 
   render() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    console.log('PROPS: ', this.props)
     const itemsList = this.props.items.length ? (
       this.props.items.map(item => (
         <tr key={item.id}>
