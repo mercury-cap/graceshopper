@@ -19,6 +19,7 @@ const AuthForm = props => {
                 name="email"
                 type="email"
                 id="email"
+                required="required"
                 className="validate"
               />
               <label htmlFor="email">Email</label>
@@ -26,7 +27,12 @@ const AuthForm = props => {
           </div>
           <div className="row">
             <div className="input-field col s6">
-              <input name="password" type="password" id="password" />
+              <input
+                name="password"
+                type="password"
+                id="password"
+                required="required"
+              />
               <label htmlFor="password">Password</label>
             </div>
           </div>
@@ -47,7 +53,7 @@ const AuthForm = props => {
                 className="waves-effect waves-light amber darken-4 btn"
               >
                 <div>
-                  <a href="/auth/google">{displayName} with Google</a>
+                  <a href="/auth/google">{displayName}with Google</a>
                 </div>
               </button>
             </div>
