@@ -9,27 +9,34 @@ class Cart extends Component {
     this.state = {
       items: []
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount = async () => {
     await this.props.getCartItems()
+    this.setState({items: this.props.items})
   }
 
-  handleSubmit = event => {
-    const itemId = event.target.value
-    this.props.deleteItem(itemId)
-  }
+  // remove = async event => {
+  //   const itemId = event.target.value
+  //   await this.props.deleteItem(itemId)
+  //   await this.props.getCartItems()
+  // }
 
   render() {
-    const itemsList = this.props.items.length ? (
-      this.props.items.map(item => (
+    console.log('PROPS: ', this.props)
+    const itemsList = this.state.items.length ? (
+      this.state.items.map(item => (
         <tr key={item.id}>
           <td>{item.name}</td>
           <td>${(item.price / 100).toFixed(2)}</td>
           <td>{item.order_items.quantity}</td>
           <td>
-            <button type="submit" onClick={this.handleSubmit} value={item.id}>
+            <button
+              type="submit"
+              onClick={() => this.props.deleteItem(item.id)}
+              value={item.id}
+            >
               REMOVE
             </button>
           </td>
@@ -56,7 +63,7 @@ class Cart extends Component {
 
           <tbody>{itemsList}</tbody>
         </table>
-        {this.props.items.length ? (
+        {this.state.items.length ? (
           <Link to="/checkout">
             <button
               className="waves-effect waves-light amber darken-4 btn"
