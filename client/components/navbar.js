@@ -16,8 +16,8 @@ class Navbar extends Component {
       <div>
         <nav>
           <div className="nav-wrapper black">
-            <Link to="/" className="brand-logo black">
-              🔥HOT 'N' SAUCEY🔥
+            <Link to="/" className="brand-logo">
+              <img src="/hotnsaucey.png" />
             </Link>
             {isLoggedIn ? (
               <ul id="nav-mobile" className="right hide-on-med-and-down black">
