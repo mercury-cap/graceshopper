@@ -45,18 +45,18 @@ class Navbar extends Component {
               <ul id="nav-mobile" className="right hide-on-med-and-down black">
                 {/* The navbar will show these links before you log in */}
                 <li>
+                  <Link to="/cart">
+                    <i className="material-icons left prefix white-text">
+                      shopping_cart
+                    </i>
+                    <span>{cart.length}</span>
+                  </Link>
+                </li>
+                <li>
                   <Link to="/login">Login</Link>
                 </li>
                 <li>
                   <Link to="/signup">Sign Up</Link>
-                </li>
-                <li>
-                  <Link to="/cart">
-                    <i className="material-icons prefix">shopping_cart</i>
-                  </Link>
-                </li>
-                <li>
-                  <span>{cart.length}</span>
                 </li>
               </ul>
             )}
