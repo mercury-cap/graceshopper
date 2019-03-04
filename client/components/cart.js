@@ -10,6 +10,7 @@ class Cart extends Component {
       items: []
     }
     // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount = async () => {
@@ -23,6 +24,10 @@ class Cart extends Component {
   //   await this.props.getCartItems()
   // }
 
+  handleChange = event => {
+    const newQuantity = event.target.value
+  }
+
   render() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     console.log('PROPS: ', this.props)
@@ -32,8 +37,8 @@ class Cart extends Component {
           <td>{item.name}</td>
           <td>${(item.price / 100).toFixed(2)}</td>
           <td>
-            <select className="browser-default">
-              <option selected value="quantity">
+            <select onChange={this.handleChange} className="browser-default">
+              <option selected>
                 {item.order_items ? item.order_items.quantity : 1}
               </option>
               {numbers

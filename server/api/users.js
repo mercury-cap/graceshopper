@@ -132,3 +132,29 @@ router.delete('/cart/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/cart/:id', async (req, res, next) => {
+  const findQuery = req.user
+    ? {userId: req.user.id, status: 'in progress'}
+    : {sessionId: req.session.id, status: 'in progress'}
+
+  try {
+    const order = await Orders.findOne({
+      where: findQuery
+    })
+    const item = await OrderItems.findOne({
+      where: {
+        orderId: order.id,
+        productId: req.params.id
+      }
+    })
+
+    const updatedItem = await item.update({
+      quanity: req.body.quanity
+    })
+
+    res.status(200).end(updatedItem)
+  } catch (err) {
+    next(err)
+  }
+})
