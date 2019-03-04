@@ -1,55 +1,90 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {getCartItems} from '../store/product'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <div id="navbar">
-      <Link to="/">
-        <h1>🔥HOT 'N' SAUCEY🔥</h1>
-      </Link>
-      <nav>
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-            <Link to="/cart">Cart</Link>
+class Navbar extends Component {
+  componentDidMount() {
+    this.props.getCartItems()
+  }
+
+  render() {
+    const {handleClick, isLoggedIn, cart} = this.props
+    return (
+      <div>
+        <nav>
+          <div className="nav-wrapper black">
+            <Link to="/" className="brand-logo black">
+              🔥HOT 'N' SAUCEY🔥
+            </Link>
+            {isLoggedIn ? (
+              <ul id="nav-mobile" className="right hide-on-med-and-down black">
+                {/* The navbar will show these links after you log in */}
+                <li>
+                  <Link to="/home">
+                    <i className="material-icons prefix">person</i>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/cart">
+                    <i className="material-icons left prefix white-text">
+                      shopping_cart
+                    </i>
+                    <span>{cart.length}</span>
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" onClick={handleClick}>
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            ) : (
+              <ul id="nav-mobile" className="right hide-on-med-and-down black">
+                {/* The navbar will show these links before you log in */}
+                <li>
+                  <Link to="/cart">
+                    <i className="material-icons left prefix white-text">
+                      shopping_cart
+                    </i>
+                    <span>{cart.length}</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/signup">Sign Up</Link>
+                </li>
+              </ul>
+            )}
           </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/cart">Cart</Link>
-          </div>
-        )}
-      </nav>
-    </div>
-    <hr />
-  </div>
-)
+        </nav>
+      </div>
+    )
+  }
+}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cart: state.product.cart
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    handleClick() {
-      dispatch(logout())
-    }
+const mapDispatch = dispatch => ({
+  handleClick() {
+    dispatch(logout())
+  },
+  getCartItems() {
+    dispatch(getCartItems())
   }
-}
+})
 
 export default connect(mapState, mapDispatch)(Navbar)
 

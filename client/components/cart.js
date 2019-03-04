@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getCartItems, removeItem} from '../store/product'
+
 
 class Cart extends Component {
   constructor() {
@@ -21,33 +23,52 @@ class Cart extends Component {
   }
 
   render() {
+    const itemsList = this.props.items.length ? (
+      this.props.items.map(item => (
+        <tr key={item.id}>
+          <td>{item.name}</td>
+          <td>${(item.price / 100).toFixed(2)}</td>
+          <td>{item.order_items.quantity}</td>
+         <td><button
+            type="submit"
+            onClick={this.handleSubmit}
+            value={item.id}
+            >
+            REMOVE
+            </button></td>
+        </tr>
+      ))
+    ) : (
+      <tr>
+        <td>Your cart is empty!</td>
+      </tr>
+    )
+
     return (
-      <div>
-        <div id="basket">
-          <h2>Your items</h2>
-          {this.props.items.length ? (
-            this.props.items.map(item => (
-              <div key={item.id}>
-                <h3>{item.productName}</h3>
-                <img src={item.imageUrl} />
-                <p>${(item.price / 100).toFixed(2)}</p>
-                <p>{item.quantity}</p>
-                <button
-                  type="submit"
-                  onClick={this.handleSubmit}
-                  value={item.id}
-                >
-                  REMOVE
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>Your cart is empty!</p>
-          )}
-        </div>
-        <div id="order-summary">
-          <h2>Summary</h2>
-        </div>
+      <div className="container">
+        <h2>Your items</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Item Price</th>
+              <th>Item Quantity</th>
+              <th>Remove<th>
+            </tr>
+          </thead>
+
+          <tbody>{itemsList}</tbody>
+        </table>
+        {this.props.items.length ? (
+          <Link to="/checkout">
+            <button
+              className="waves-effect waves-light amber darken-4 btn"
+              type="submit"
+            >
+              Proceed to checkout
+            </button>
+          </Link>
+        ) : null}
       </div>
     )
   }
