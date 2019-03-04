@@ -24,13 +24,23 @@ class Cart extends Component {
   // }
 
   render() {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     console.log('PROPS: ', this.props)
     const itemsList = this.props.items.length ? (
       this.props.items.map(item => (
         <tr key={item.id}>
           <td>{item.name}</td>
           <td>${(item.price / 100).toFixed(2)}</td>
-          <td>{item.order_items ? item.order_items.quantity : 1}</td>
+          <td>
+            <select className="browser-default">
+              <option selected value="quantity">
+                {item.order_items ? item.order_items.quantity : 1}
+              </option>
+              {numbers
+                .filter(number => number !== item.order_items.quantity)
+                .map(num => <option key={num}>{num}</option>)}
+            </select>
+          </td>
           <td>
             <button
               type="submit"
