@@ -11,9 +11,10 @@ div.section {
   max-height: 50px;
   padding-left: 10px;
   padding-top: 10px;
+}
 
 a {
-  color: white;
+  color: blue;
 }
 
 .input-field input:focus + label {
