@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getCartItems, removeItem} from '../store/product'
 
-
 class Cart extends Component {
   constructor() {
     super()
@@ -29,13 +28,11 @@ class Cart extends Component {
           <td>{item.name}</td>
           <td>${(item.price / 100).toFixed(2)}</td>
           <td>{item.order_items.quantity}</td>
-         <td><button
-            type="submit"
-            onClick={this.handleSubmit}
-            value={item.id}
-            >
-            REMOVE
-            </button></td>
+          <td>
+            <button type="submit" onClick={this.handleSubmit} value={item.id}>
+              REMOVE
+            </button>
+          </td>
         </tr>
       ))
     ) : (
@@ -53,7 +50,7 @@ class Cart extends Component {
               <th>Item Name</th>
               <th>Item Price</th>
               <th>Item Quantity</th>
-              <th>Remove<th>
+              <th>Remove</th>
             </tr>
           </thead>
 
@@ -74,17 +71,13 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    items: state.product.cart
-  }
-}
+const mapStateToProps = state => ({
+  items: state.product.cart
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getCartItems: () => dispatch(getCartItems()),
-    deleteItem: itemId => dispatch(removeItem(itemId))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getCartItems: () => dispatch(getCartItems()),
+  deleteItem: itemId => dispatch(removeItem(itemId))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
