@@ -38,8 +38,7 @@ class Checkout extends Component {
         currency: 'USD'
       })
       clearCart(cartId, amount)
-      alert('Payment successful!')
-      this.props.history.push('/')
+      this.props.history.push(`/ordersummary/${cartId}`)
     } catch (error) {
       alert('Payment error')
     }

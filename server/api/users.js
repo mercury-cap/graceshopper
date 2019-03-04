@@ -82,7 +82,7 @@ router.put('/cart', async (req, res, next) => {
 router.get('/cart', async (req, res, next) => {
   try {
     let cart = await Orders.findOne({
-      where: {sessionId: req.session.id},
+      where: {sessionId: req.session.id, status: 'in progress'},
       include: [
         {
           model: Products,
@@ -95,7 +95,7 @@ router.get('/cart', async (req, res, next) => {
       await cart.update({userId: req.user.id})
     } else if (!cart && req.user) {
       cart = await Orders.findOne({
-        where: {userId: req.user.id},
+        where: {userId: req.user.id, status: 'in progress'},
         include: [
           {
             model: Products,
