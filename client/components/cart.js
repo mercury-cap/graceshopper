@@ -24,9 +24,9 @@ class Cart extends Component {
   //   await this.props.getCartItems()
   // }
 
-  handleChange = event => {
-    const newQuantity = event.target.value
-  }
+  // handleChange = (event) =>{
+  //   const newQuantity = event.target.value
+  // }
 
   render() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
