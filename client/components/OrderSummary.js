@@ -10,7 +10,7 @@ const OrderSummary = props => {
           <p>Order #{props.match.params.cartId}</p>
         </div>
       </div>
-    <div>
+    </div>
   )
 }
 
