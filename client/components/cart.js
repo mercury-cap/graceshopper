@@ -37,7 +37,11 @@ class Cart extends Component {
                 {item.order_items ? item.order_items.quantity : 1}
               </option>
               {numbers
-                .filter(number => number !== item.order_items.quantity)
+                .filter(
+                  number =>
+                    number !==
+                    (item.order_items ? item.order_items.quantity : 1)
+                )
                 .map(num => <option key={num}>{num}</option>)}
             </select>
           </td>
@@ -73,7 +77,7 @@ class Cart extends Component {
 
           <tbody>{itemsList}</tbody>
         </table>
-        {this.state.items.length ? (
+        {this.props.items.length ? (
           <Link to="/checkout">
             <button
               className="waves-effect waves-light amber darken-4 btn"
