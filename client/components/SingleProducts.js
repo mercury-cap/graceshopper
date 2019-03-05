@@ -19,12 +19,8 @@ class SingleProduct extends Component {
     scriptTw.src = 'https://platform.twitter.com/widgets.js'
     scriptTw.async = true
     scriptTw.charset = 'utf-8'
-    const scriptFb = document.createElement('script')
-    scriptFb.src =
-      'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2'
-    scriptTw.async = true
+    scriptTw.defer = true
     document.body.appendChild(scriptTw)
-    document.body.appendChild(scriptFb)
   }
 
   add = () => {
@@ -89,26 +85,6 @@ class SingleProduct extends Component {
                     data-show-count="false"
                   >
                     Tweet
-                  </a>
-                </div>
-                <div
-                  className="fb-share-button"
-                  data-href={`https://mercury-cap-graceshopper.herokuapp.com/products/${
-                    match.params.id
-                  }`}
-                  data-layout="button"
-                  data-size="small"
-                  data-mobile-iframe="true"
-                >
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmercury-cap-graceshopper.herokuapp.com%2Fproducts%2F${
-                      match.params.id
-                    }&amp;src=sdkpreparse`}
-                    className="fb-xfbml-parse-ignore"
-                  >
-                    Share
                   </a>
                 </div>
               </div>
