@@ -94,12 +94,14 @@ class Cart extends Component {
             Clear Cart
           </button>
         ) : (
-          <button
-            className="waves-effect waves-light amber darken-4 btn"
-            type="submit"
-          >
-            Add Items
-          </button>
+          <Link to="/">
+            <button
+              className="waves-effect waves-light amber darken-4 btn"
+              type="submit"
+            >
+              Add Items
+            </button>
+          </Link>
         )}
         {this.props.items.length ? (
           <div>
