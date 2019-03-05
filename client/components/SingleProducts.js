@@ -15,7 +15,6 @@ class SingleProduct extends Component {
   }
 
   add = () => {
-    // add upper limit based on inventory
     this.setState(prevState => ({quantity: prevState.quantity + 1}))
   }
 
