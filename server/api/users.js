@@ -164,13 +164,15 @@ router.delete('/cart/order/:id', async (req, res, next) => {
 })
 
 router.get('/orders/:userId', async (req, res, next) => {
-  const findQuery = req.user
-    ? {userId: req.params.userId, status: 'complete'}
-    : {sessionId: req.params.userId, status: 'complete'}
-
   try {
-    const orders = await Orders.findAll({
-      where: findQuery
+    let orders = await Orders.findAll({
+      where: {sessionId: req.session.id, status: 'complete'},
+      include: [
+        {
+          model: Products,
+          attributes: ['id', 'name', 'price', 'imageUrl']
+        }
+      ]
     })
     res.status(200).json(orders)
   } catch (err) {
