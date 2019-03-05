@@ -48,9 +48,9 @@ class SingleProduct extends Component {
     return (
       <div className="container" id="single-product">
         <div className="row">
-          <div className="col s6 center">
+          <div className="col s6 center" id="product-image">
             <img width="50%" src={product.imageUrl} />
-          </div>
+      </div>
           <div className="col s6">
             <div id="product-details">
               <h2>{product.name}</h2>
@@ -59,15 +59,15 @@ class SingleProduct extends Component {
               <p>Product type: {product.type}</p>
               <p>Price: {`$${(product.price / 100).toFixed(2)}`}</p>
               <p>Quantity: {this.state.quantity}</p>
-              <button type="button" onClick={this.add}>
-                +
-              </button>
               <button
                 type="button"
                 onClick={this.subtract}
                 disabled={this.state.quantity === 0}
               >
                 -
+              </button>
+              <button type="button" onClick={this.add}>
+                +
               </button>
               <button type="submit" onClick={this.handleSubmit}>
                 Add to Cart
