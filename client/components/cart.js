@@ -11,9 +11,6 @@ import {
 class Cart extends Component {
   constructor() {
     super()
-    this.state = {
-      items: []
-    }
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -25,15 +22,16 @@ class Cart extends Component {
     const quantity = event.target.value
     const productId = event.target.name
     this.props.updateQuantity(quantity, productId)
-    // this.props.updateQuantity({productId, quantity})
   }
 
   render() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const itemsList = this.props.items.length ? (
       this.props.items.map(item => (
-        <tr key={item.id}>
-          <td>{item.name}</td>
+        <tr className="cart-item" key={item.id}>
+          <td>
+            <Link to={`/products/${item.id}`}>{item.name}</Link>
+          </td>
           <td>${(item.price / 100).toFixed(2)}</td>
           <td>
             <select
@@ -87,14 +85,25 @@ class Cart extends Component {
           <tbody>{itemsList}</tbody>
         </table>
         {this.props.items.length ? (
-          <Link to="/checkout">
-            <button
-              className="waves-effect waves-light amber darken-4 btn"
-              type="submit"
-            >
-              Proceed to checkout
-            </button>
-          </Link>
+          <div>
+            <h3 id="cart-subtotal">
+              <strong>Subtotal</strong>: $
+              {(
+                this.props.items.reduce(
+                  (sum, item) => sum + item.price * item.order_items.quantity,
+                  0
+                ) / 100
+              ).toFixed(2)}
+            </h3>
+            <Link to="/checkout">
+              <button
+                className="waves-effect waves-light amber darken-4 btn"
+                type="submit"
+              >
+                Proceed to checkout
+              </button>
+            </Link>
+          </div>
         ) : null}
       </div>
     )
