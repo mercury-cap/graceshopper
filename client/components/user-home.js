@@ -24,7 +24,6 @@ export class UserHome extends Component {
   componentDidMount = async () => {
     await this.props.me()
     const userInfo = this.props.user
-    console.log('user', userInfo)
 
     this.setState(userInfo)
   }
@@ -43,7 +42,6 @@ export class UserHome extends Component {
   render() {
     const {email} = this.props
     let {user} = this.props
-    console.log('state in render: ', this.state)
     return (
       <div>
         <h3>Welcome!</h3>
@@ -122,6 +120,14 @@ export class UserHome extends Component {
                     />
                   </div>
                 </div>
+              </div>
+              <div className="col s3 orange-text">
+                <button
+                  type="submit"
+                  className="waves-effect waves-light amber darken-4 btn"
+                >
+                  Update
+                </button>
               </div>
             </form>
           </div>
