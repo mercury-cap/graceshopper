@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getCartItems, removeItem, updateQuantity} from '../store/product'
+import {
+  getCartItems,
+  removeItem,
+  updateQuantity,
+  updateCartInServer
+} from '../store/product'
 
 class Cart extends Component {
   constructor() {
@@ -112,6 +117,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCartItems: () => dispatch(getCartItems()),
   deleteItem: itemId => dispatch(removeItem(itemId)),
+  // updateQuantity: item => dispatch(updateCartInServer(item))
   updateQuantity: (quantity, itemId) =>
     dispatch(updateQuantity(quantity, itemId))
 })
