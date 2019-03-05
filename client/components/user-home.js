@@ -21,8 +21,12 @@ export class UserHome extends Component {
     }
   }
 
-  componentDidMount = () => {
-    this.props.me()
+  componentDidMount = async () => {
+    await this.props.me()
+    const userInfo = this.props.user
+    console.log('user', userInfo)
+
+    this.setState(userInfo)
   }
 
   handleChange = event => {
@@ -39,8 +43,7 @@ export class UserHome extends Component {
   render() {
     const {email} = this.props
     let {user} = this.props
-    console.log(this.props)
-
+    console.log('state in render: ', this.state)
     return (
       <div>
         <h3>Welcome!</h3>
@@ -51,12 +54,10 @@ export class UserHome extends Component {
                 <div className="row">
                   <div className="input-field col s6">
                     <input
-                      value={user.firstName}
+                      value={this.state.firstName}
                       className="autocomplete"
-                      name="firstName"
                       type="text"
                       id="firstName"
-                      required="required"
                       onChange={this.handleChange}
                     />
                   </div>
@@ -64,9 +65,8 @@ export class UserHome extends Component {
                 <div className="row">
                   <div className="input-field col s6">
                     <input
-                      value={user.lastName}
+                      value={this.state.lastName}
                       className="autocomplete"
-                      name="lastName"
                       type="text"
                       id="lastName"
                       required="required"
@@ -77,9 +77,8 @@ export class UserHome extends Component {
                 <div className="row">
                   <div className="input-field col s6">
                     <input
-                      value={user.shippingAddress}
+                      value={this.state.shippingAddress}
                       className="autocomplete"
-                      name="shippingAddress"
                       type="text"
                       id="shippingAddress"
                       required="required"
@@ -90,9 +89,8 @@ export class UserHome extends Component {
                 <div className="row">
                   <div className="input-field col s6">
                     <input
-                      value={user.shippingCity}
+                      value={this.state.shippingCity}
                       className="autocomplete"
-                      name="shippingCity"
                       type="text"
                       id="shippingCity"
                       required="required"
@@ -103,9 +101,8 @@ export class UserHome extends Component {
                 <div className="row">
                   <div className="input-field col s6">
                     <input
-                      value={user.shippingState}
+                      value={this.state.shippingState}
                       className="autocomplete"
-                      name="shippingState"
                       type="text"
                       id="shippingState"
                       required="required"
@@ -116,9 +113,8 @@ export class UserHome extends Component {
                 <div className="row">
                   <div className="input-field col s6">
                     <input
-                      value={user.shippingZip}
+                      value={this.state.shippingZip}
                       className="autocomplete"
-                      name="shippingZip"
                       type="text"
                       id="shippingZip"
                       required="required"
