@@ -12,6 +12,10 @@ class Navbar extends Component {
 
   render() {
     const {handleClick, isLoggedIn, cart} = this.props
+    const cartCount = cart.reduce(
+      (total, item) => total + item.order_items.quantity,
+      0
+    )
     return (
       <div>
         <nav>
@@ -37,7 +41,7 @@ class Navbar extends Component {
                     <i className="material-icons left prefix white-text">
                       shopping_cart
                     </i>
-                    <span>{cart.length}</span>
+                    <span>{cart.length ? cartCount : null}</span>
                   </Link>
                 </li>
               </ul>
@@ -55,14 +59,7 @@ class Navbar extends Component {
                     <i className="material-icons left prefix white-text">
                       shopping_cart
                     </i>
-                    <span>
-                      {cart.length
-                        ? cart.reduce(
-                            (total, item) => total + item.order_items.quantity,
-                            0
-                          )
-                        : null}
-                    </span>
+                    <span>{cart.length ? cartCount : null}</span>
                   </Link>
                 </li>
               </ul>
