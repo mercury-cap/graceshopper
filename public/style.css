@@ -17,6 +17,10 @@ a {
   color: white;
 }
 
+.twitter-share-button {
+  color: black;
+}
+
 .input-field input:focus + label {
   color: orange !important;
 }
@@ -63,7 +67,11 @@ a {
   display: flex;
   justify-content: center;
 }
+
 .card-content {
-  /* background-color: black; */
   height: 100px;
+}
+
+#social-media-btns {
+  margin-top: 20px;
 }
