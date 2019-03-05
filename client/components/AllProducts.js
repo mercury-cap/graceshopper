@@ -49,8 +49,8 @@ class AllProducts extends Component {
               <div className="cardimage">
                 <img src={product.imageUrl} />
               </div>
-              <div className="card-content black">
-                <div className="orange-text">
+              <div className="card-content #f5f5f5 grey lighten-4 center-align">
+                <div className="black-text">
                   <strong>{product.name}</strong>
                 </div>
               </div>
