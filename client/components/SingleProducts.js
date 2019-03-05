@@ -14,6 +14,15 @@ class SingleProduct extends Component {
     this.props.getSingleProduct(this.props.match.params.id)
   }
 
+  componentDidUpdate = () => {
+    const scriptTw = document.createElement('script')
+    scriptTw.src = 'https://platform.twitter.com/widgets.js'
+    scriptTw.async = true
+    scriptTw.charset = 'utf-8'
+    scriptTw.defer = true
+    document.body.appendChild(scriptTw)
+  }
+
   add = () => {
     this.setState(prevState => ({quantity: prevState.quantity + 1}))
   }
@@ -34,19 +43,21 @@ class SingleProduct extends Component {
   }
 
   render() {
+    console.log('Props: ', this.props)
+    const {product, match} = this.props
     return (
       <div className="container" id="single-product">
         <div className="row">
           <div className="col s6 center">
-            <img width="50%" src={this.props.product.imageUrl} />
+            <img width="50%" src={product.imageUrl} />
           </div>
           <div className="col s6">
             <div id="product-details">
-              <h2>{this.props.product.name}</h2>
-              <p>Origin: {this.props.product.country}</p>
-              <p>Scoville Heat Units (SHU): {this.props.product.scoville}</p>
-              <p>Product type: {this.props.product.type}</p>
-              <p>Price: {`$${(this.props.product.price / 100).toFixed(2)}`}</p>
+              <h2>{product.name}</h2>
+              <p>Origin: {product.country}</p>
+              <p>Scoville Heat Units (SHU): {product.scoville}</p>
+              <p>Product type: {product.type}</p>
+              <p>Price: {`$${(product.price / 100).toFixed(2)}`}</p>
               <p>Quantity: {this.state.quantity}</p>
               <button type="button" onClick={this.add}>
                 +
@@ -61,6 +72,22 @@ class SingleProduct extends Component {
               <button type="submit" onClick={this.handleSubmit}>
                 Add to Cart
               </button>
+              <div id="social-media-btns">
+                <div>
+                  <a
+                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                    className="twitter-share-button"
+                    data-text={`Oowee! Diggin' this ${product.name} sauce at`}
+                    data-url={`https://mercury-cap-graceshopper.herokuapp.com${
+                      location.pathname
+                    }`}
+                    data-hashtags="hotnsaucy"
+                    data-show-count="false"
+                  >
+                    Tweet
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
