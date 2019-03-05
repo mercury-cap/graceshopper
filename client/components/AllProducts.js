@@ -16,8 +16,9 @@ class AllProducts extends Component {
   }
 
   handleHeatChange = e => {
+    console.log('Event target: ', typeof e.target.name)
     this.setState({
-      heat: e.target.value
+      heat: e.target.name
     })
   }
 
@@ -63,13 +64,49 @@ class AllProducts extends Component {
     return (
       <div>
         <div className="container">
-          <p>Select your heat</p>
-          <select onChange={this.handleHeatChange} className="browser-default">
-            <option value="all">All</option>
-            <option value="mild">Mild</option>
-            <option value="hot">Hot</option>
-            <option value="insane">Insane</option>
-          </select>
+          <p>Filter by:</p>
+          <div id="filters">
+            <div>
+              <span className="filter-cat">
+                <strong>Heat</strong>
+              </span>
+              <a
+                className="waves-effect waves-light btn #424242 grey darken-3"
+                name="mild"
+                onClick={this.handleHeatChange}
+              >
+                🔥
+              </a>
+              <a
+                className="waves-effect waves-light btn #424242 grey darken-3"
+                name="hot"
+                onClick={this.handleHeatChange}
+              >
+                🔥🔥
+              </a>
+              <a
+                className="waves-effect waves-light btn #424242 grey darken-3"
+                name="insane"
+                onClick={this.handleHeatChange}
+              >
+                🔥🔥🔥
+              </a>
+            </div>
+            <div id="country-filter">
+              <span className="filter-cat">
+                <strong>Country of Origin</strong>
+              </span>
+              <select
+                onChange={this.handleCountryChange}
+                className="browser-default"
+              >
+                <option value="all">All</option>
+                <option value="mild">🔥</option>
+                <option value="hot">🔥🔥</option>
+                <option value="insane">🔥🔥🔥</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <div className="container">
