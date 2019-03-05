@@ -15,11 +15,16 @@ class SingleProduct extends Component {
   }
 
   componentDidUpdate = () => {
-    const script = document.createElement('script')
-    script.src = 'https://platform.twitter.com/widgets.js'
-    script.async = true
-    script.charset = 'utf-8'
-    document.body.appendChild(script)
+    const scriptTw = document.createElement('script')
+    scriptTw.src = 'https://platform.twitter.com/widgets.js'
+    scriptTw.async = true
+    scriptTw.charset = 'utf-8'
+    const scriptFb = document.createElement('script')
+    scriptFb.src =
+      'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2'
+    scriptTw.async = true
+    document.body.appendChild(scriptTw)
+    document.body.appendChild(scriptFb)
   }
 
   add = () => {
@@ -43,7 +48,7 @@ class SingleProduct extends Component {
 
   render() {
     console.log('Props: ', this.props)
-    const {product, location} = this.props
+    const {product, match} = this.props
     return (
       <div className="container" id="single-product">
         <div className="row">
@@ -72,18 +77,40 @@ class SingleProduct extends Component {
                 Add to Cart
               </button>
               <div id="social-media-btns">
-                <a
-                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                  className="twitter-share-button"
-                  data-text={`Oowee! Found some spicy ${product.name} sauce at`}
-                  data-url={`https://mercury-cap-graceshopper.herokuapp.com${
-                    location.pathname
+                <div>
+                  <a
+                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                    className="twitter-share-button"
+                    data-text={`Oowee! Diggin' this ${product.name} sauce at`}
+                    data-url={`https://mercury-cap-graceshopper.herokuapp.com${
+                      location.pathname
+                    }`}
+                    data-hashtags="hotnsaucy"
+                    data-show-count="false"
+                  >
+                    Tweet
+                  </a>
+                </div>
+                <div
+                  className="fb-share-button"
+                  data-href={`https://mercury-cap-graceshopper.herokuapp.com/products/${
+                    match.params.id
                   }`}
-                  data-hashtags="hotnsaucy"
-                  data-show-count="false"
+                  data-layout="button"
+                  data-size="small"
+                  data-mobile-iframe="true"
                 >
-                  Tweet
-                </a>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmercury-cap-graceshopper.herokuapp.com%2Fproducts%2F${
+                      match.params.id
+                    }&amp;src=sdkpreparse`}
+                    className="fb-xfbml-parse-ignore"
+                  >
+                    Share
+                  </a>
+                </div>
               </div>
             </div>
           </div>
