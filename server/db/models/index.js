@@ -19,7 +19,8 @@ const Sequelize = require('sequelize')
  */
 
 const OrderItems = db.define('order_items', {
-  quantity: Sequelize.INTEGER
+  quantity: Sequelize.INTEGER,
+  price: Sequelize.INTEGER
 })
 
 Orders.belongsTo(User)

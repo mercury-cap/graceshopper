@@ -15,6 +15,12 @@ router.post('/', (req, res, next) => {
 router.put('/:cartId', async (req, res, next) => {
   try {
     const cart = await Orders.findById(req.params.cartId)
+    // include the products in the findById orders query
+
+    // cart.order_items.forEach(orderItem => {
+    //   await orderItem.update({price: orderItem.product.price})
+    // })
+
     await cart.update({status: 'complete', total: req.body.amt})
     res.sendStatus(200)
   } catch (error) {
