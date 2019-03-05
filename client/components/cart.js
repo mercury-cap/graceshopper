@@ -80,14 +80,25 @@ class Cart extends Component {
           <tbody>{itemsList}</tbody>
         </table>
         {this.props.items.length ? (
-          <Link to="/checkout">
-            <button
-              className="waves-effect waves-light amber darken-4 btn"
-              type="submit"
-            >
-              Proceed to checkout
-            </button>
-          </Link>
+          <div>
+            <p>
+              <strong>Subtotal</strong>: $
+              {(
+                this.props.items.reduce(
+                  (sum, item) => sum + item.price * item.order_items.quantity,
+                  0
+                ) / 100
+              ).toFixed(2)}
+            </p>
+            <Link to="/checkout">
+              <button
+                className="waves-effect waves-light amber darken-4 btn"
+                type="submit"
+              >
+                Proceed to checkout
+              </button>
+            </Link>
+          </div>
         ) : null}
       </div>
     )
