@@ -15,10 +15,18 @@ class OrderHistory extends Component {
     const orders = this.props.items
     return (
       <div>
+        <div>
+          <h2>Order History</h2>
+        </div>
         {orders.map(order => (
           <div key={order.id}>
             <p>Order #: {order.id}</p>
-            {order.products.map(item => <p key={item.name}>{item.name}</p>)}
+            {order.products.map(item => (
+              <div key={item.name}>
+                <p>{item.name}</p>
+                <p>${(item.price / 100).toFixed(2)}</p>
+              </div>
+            ))}
           </div>
         ))}
       </div>
