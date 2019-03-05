@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {me} from '../store/user'
 
 /**
  * COMPONENT
@@ -14,7 +15,12 @@ export class UserHome extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.me()
+  }
+
   render() {
+    let {user} = this.props
     return (
       <div>
         <h3>Welcome!</h3>
@@ -25,92 +31,68 @@ export class UserHome extends Component {
                 <div className="row">
                   <div className="input-field col s6">
                     <input
-                      value=""
+                      value={user.firstName}
                       name="firstName"
                       type="text"
                       id="firstName"
                       required="required"
                     />
-                    <label htmlFor="firstName">First Name</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s6">
                     <input
+                      value={user.lastName}
                       name="lastName"
                       type="text"
                       id="lastName"
                       required="required"
                     />
-                    <label htmlFor="lastName">Last Name</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s6">
                     <input
+                      value={user.shippingAddress}
                       name="shippingAddress"
                       type="text"
                       id="shippingAddress"
                       required="required"
                     />
-                    <label htmlFor="shippingAddress">Address</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s6">
                     <input
+                      value={user.shippingCity}
                       name="shippingCity"
                       type="text"
                       id="shippingCity"
                       required="required"
                     />
-                    <label htmlFor="shippingCity">City</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s6">
                     <input
+                      value={user.shippingState}
                       name="shippingState"
                       type="text"
                       id="shippingState"
                       required="required"
                     />
-                    <label htmlFor="shippingState">State</label>
                   </div>
                 </div>
                 <div className="row">
                   <div className="input-field col s6">
                     <input
+                      value={user.shippingZip}
                       name="shippingZip"
                       type="text"
                       id="shippingZip"
                       required="required"
                     />
-                    <label htmlFor="shippingZip">Zip Code</label>
                   </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s6">
-                  <input
-                    name="email"
-                    type="email"
-                    id="email"
-                    required="required"
-                    className="validate"
-                  />
-                  <label htmlFor="email">Email</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s6">
-                  <input
-                    name="password"
-                    type="password"
-                    id="password"
-                    required="required"
-                  />
-                  <label htmlFor="password">Password</label>
                 </div>
               </div>
             </form>
@@ -130,7 +112,13 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = dispatch => {
+  return {
+    me: () => dispatch(me())
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES
