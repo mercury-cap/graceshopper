@@ -6,6 +6,7 @@ const UPDATE_CART = 'UPDATE_CART'
 const GOT_CART_ITEMS = 'GOT_CART_ITEMS'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 const COMPLETED_CHECKOUT = 'COMPLETED_CHECKOUT'
+const GOT_CART = 'GOT_CART'
 
 export const gotAllProducts = products => ({
   type: GOT_ALL_PRODUCTS,
@@ -35,6 +36,11 @@ const completedCheckout = () => ({
 const removedItem = itemId => ({
   type: REMOVE_ITEM,
   itemId
+})
+
+const gotCart = cartId => ({
+  type: GOT_CART,
+  cartId
 })
 
 export const getAllProducts = () => {
@@ -85,6 +91,13 @@ export const updateQuantity = (quantity, itemId) => async dispatch => {
   dispatch(updateCart(updatedItem))
 }
 
+export const removeCart = cartId => {
+  return async dispatch => {
+    await axios.delete(`/api/users/cart/order/${cartId}`)
+    dispatch(gotCart())
+  }
+}
+
 const initialState = {
   products: [],
   singleProduct: {},
@@ -112,6 +125,8 @@ export default function(state = initialState, action) {
     }
     case COMPLETED_CHECKOUT:
       return {...state, cart: initialState.cart, cartId: initialState.cartId}
+    case GOT_CART:
+      return {...state, cart: initialState.cart}
     default:
       return state
   }

@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 import axios from 'axios'
 import history from '../history'
 
@@ -32,10 +33,29 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (
+  email,
+  password,
+  method,
+  firstName,
+  lastName,
+  shippingAddress,
+  shippingCity,
+  shippingState,
+  shippingZip
+) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, {
+      email,
+      password,
+      firstName,
+      lastName,
+      shippingAddress,
+      shippingCity,
+      shippingState,
+      shippingZip
+    })
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }

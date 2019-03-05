@@ -5,7 +5,7 @@ import {
   getCartItems,
   removeItem,
   updateQuantity,
-  updateCartInServer
+  removeCart
 } from '../store/product'
 
 class Cart extends Component {
@@ -25,6 +25,7 @@ class Cart extends Component {
   }
 
   render() {
+    const orderId = this.props.cart
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const itemsList = this.props.items.length ? (
       this.props.items.map(item => (
@@ -58,7 +59,7 @@ class Cart extends Component {
               onClick={() => this.props.deleteItem(item.id)}
               value={item.id}
             >
-              REMOVE
+              Remove
             </button>
           </td>
         </tr>
@@ -84,6 +85,25 @@ class Cart extends Component {
 
           <tbody>{itemsList}</tbody>
         </table>
+
+        {this.props.items.length ? (
+          <button
+            className="waves-effect waves-light amber darken-4 btn"
+            onClick={() => this.props.clearCart(orderId)}
+            type="submit"
+          >
+            Clear Cart
+          </button>
+        ) : (
+          <Link to="/">
+            <button
+              className="waves-effect waves-light amber darken-4 btn"
+              type="submit"
+            >
+              Add Items
+            </button>
+          </Link>
+        )}
         {this.props.items.length ? (
           <div>
             <h3 id="cart-subtotal">
@@ -95,6 +115,7 @@ class Cart extends Component {
                 ) / 100
               ).toFixed(2)}
             </h3>
+
             <Link to="/checkout">
               <button
                 className="waves-effect waves-light amber darken-4 btn"
@@ -111,15 +132,16 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-  items: state.product.cart
+  items: state.product.cart,
+  cart: state.product.cartId
 })
 
 const mapDispatchToProps = dispatch => ({
   getCartItems: () => dispatch(getCartItems()),
   deleteItem: itemId => dispatch(removeItem(itemId)),
-  // updateQuantity: item => dispatch(updateCartInServer(item))
   updateQuantity: (quantity, itemId) =>
-    dispatch(updateQuantity(quantity, itemId))
+    dispatch(updateQuantity(quantity, itemId)),
+  clearCart: orderId => dispatch(removeCart(orderId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
