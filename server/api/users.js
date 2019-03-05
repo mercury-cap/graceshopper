@@ -143,14 +143,14 @@ router.delete('/cart/:id', async (req, res, next) => {
 })
 
 router.delete('/cart/order/:id', async (req, res, next) => {
-  const findQuery = req.user
-    ? {userId: req.user.id, status: 'in progress'}
-    : {sessionId: req.session.id, status: 'in progress'}
+  // const findQuery = req.user
+  //   ? {userId: req.user.id, status: 'in progress'}
+  //   : {sessionId: req.session.id, status: 'in progress'}
 
   try {
-    const order = await Orders.findOne({
-      where: findQuery
-    })
+    // const order = await Orders.findOne({
+    //   where: findQuery
+    // })
     await OrderItems.destroy({
       where: {
         orderId: req.params.id
@@ -158,6 +158,21 @@ router.delete('/cart/order/:id', async (req, res, next) => {
     })
 
     res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/orders/:userId', async (req, res, next) => {
+  const findQuery = req.user
+    ? {userId: req.params.userId, status: 'complete'}
+    : {sessionId: req.params.userId, status: 'complete'}
+
+  try {
+    const orders = await Orders.findAll({
+      where: findQuery
+    })
+    res.status(200).json(orders)
   } catch (err) {
     next(err)
   }

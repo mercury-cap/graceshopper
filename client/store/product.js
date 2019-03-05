@@ -7,6 +7,7 @@ const GOT_CART_ITEMS = 'GOT_CART_ITEMS'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 const COMPLETED_CHECKOUT = 'COMPLETED_CHECKOUT'
 const GOT_CART = 'GOT_CART'
+const GOT_USER_ORDERS = 'GOT_USER_ORDERS'
 
 export const gotAllProducts = products => ({
   type: GOT_ALL_PRODUCTS,
@@ -41,6 +42,11 @@ const removedItem = itemId => ({
 const gotCart = cartId => ({
   type: GOT_CART,
   cartId
+})
+
+const gotOrders = orders => ({
+  type: GOT_USER_ORDERS,
+  orders
 })
 
 export const getAllProducts = () => {
@@ -98,6 +104,18 @@ export const removeCart = cartId => {
   }
 }
 
+export const getOrders = userId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/users/orders/${userId}`)
+      const orders = response.data
+      dispatch(gotOrders(orders))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 const initialState = {
   products: [],
   singleProduct: {},
@@ -105,6 +123,7 @@ const initialState = {
   cartId: 0
 }
 
+// eslint-disable-next-line complexity
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_ALL_PRODUCTS:
@@ -127,6 +146,8 @@ export default function(state = initialState, action) {
       return {...state, cart: initialState.cart, cartId: initialState.cartId}
     case GOT_CART:
       return {...state, cart: initialState.cart}
+    case GOT_USER_ORDERS:
+      return {...state, cart: action.orders}
     default:
       return state
   }

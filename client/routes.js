@@ -12,7 +12,8 @@ import {
   AdminClientList,
   Cart,
   Checkout,
-  OrderSummary
+  OrderSummary,
+  OrderHistory
 } from './components'
 
 class Routes extends Component {
@@ -34,6 +35,7 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/ordersummary/:cartId" component={OrderSummary} />
+        <Route path="/orderhistory/:userId" component={OrderHistory} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
