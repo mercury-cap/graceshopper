@@ -45,6 +45,9 @@ export class UserHome extends Component {
     return (
       <div className="container">
         <h3>Welcome!</h3>
+        <p>
+          <strong>Edit your information below:</strong>
+        </p>
 
         <div className="row">
           <form name={name} onSubmit={this.handleSubmit}>
