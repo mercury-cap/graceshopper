@@ -164,7 +164,25 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const firstName = evt.target.firstName.value
+      const lastName = evt.target.lastName.value
+      const shippingAddress = evt.target.shippingAddress.value
+      const shippingCity = evt.target.shippingCity.value
+      const shippingState = evt.target.shippingState.value
+      const shippingZip = evt.target.shippingZip.value
+      dispatch(
+        auth(
+          email,
+          password,
+          formName,
+          firstName,
+          lastName,
+          shippingAddress,
+          shippingCity,
+          shippingState,
+          shippingZip
+        )
+      )
     }
   }
 }
