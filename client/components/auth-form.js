@@ -53,7 +53,7 @@ const AuthForm = props => {
                 className="waves-effect waves-light amber darken-4 btn"
               >
                 <div>
-                  <a href="/auth/google">{displayName}with Google</a>
+                  <a href="/auth/google">{displayName} with Google</a>
                 </div>
               </button>
             </div>
