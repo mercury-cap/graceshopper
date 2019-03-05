@@ -13,6 +13,76 @@ const AuthForm = props => {
     <div className="container">
       <div className="row">
         <form onSubmit={handleSubmit} name={name}>
+          {displayName === 'Sign Up' ? (
+            <div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    name="firstName"
+                    type="text"
+                    id="firstName"
+                    required="required"
+                  />
+                  <label htmlFor="firstName">First Name</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    name="lastName"
+                    type="text"
+                    id="lastName"
+                    required="required"
+                  />
+                  <label htmlFor="lastName">Last Name</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    name="shippingAddress"
+                    type="text"
+                    id="shippingAddress"
+                    required="required"
+                  />
+                  <label htmlFor="shippingAddress">Address</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    name="shippingCity"
+                    type="text"
+                    id="shippingCity"
+                    required="required"
+                  />
+                  <label htmlFor="shippingCity">City</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    name="shippingState"
+                    type="text"
+                    id="shippingState"
+                    required="required"
+                  />
+                  <label htmlFor="shippingState">State</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    name="shippingZip"
+                    type="text"
+                    id="shippingZip"
+                    required="required"
+                  />
+                  <label htmlFor="shippingZip">Zip Code</label>
+                </div>
+              </div>
+            </div>
+          ) : null}
           <div className="row">
             <div className="input-field col s6">
               <input
@@ -94,7 +164,25 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const firstName = evt.target.firstName.value
+      const lastName = evt.target.lastName.value
+      const shippingAddress = evt.target.shippingAddress.value
+      const shippingCity = evt.target.shippingCity.value
+      const shippingState = evt.target.shippingState.value
+      const shippingZip = evt.target.shippingZip.value
+      dispatch(
+        auth(
+          email,
+          password,
+          formName,
+          firstName,
+          lastName,
+          shippingAddress,
+          shippingCity,
+          shippingState,
+          shippingZip
+        )
+      )
     }
   }
 }
