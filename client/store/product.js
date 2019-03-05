@@ -55,13 +55,15 @@ export const getSingleProduct = id => {
 }
 
 export const updateCartInServer = item => async dispatch => {
-  await axios.put('/api/users/cart', item)
-  dispatch(updateCart(item))
+  const {data: updatedOrder} = await axios.put('/api/users/cart', item)
+  console.log('inside PUT thunk, received: ', updatedOrder)
+  dispatch(updateCart(updatedOrder.products))
 }
 
 export const getCartItems = () => {
   return async dispatch => {
     const {data: cart} = await axios.get('/api/users/cart')
+    console.log('inside GET thunk, received: ', cart)
     if (cart) dispatch(gotCartItems(cart))
   }
 }

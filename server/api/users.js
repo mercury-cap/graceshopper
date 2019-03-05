@@ -34,7 +34,7 @@ function isAuthenticated(req, res, next) {
 }
 
 async function updateCartItems(req, order) {
-  const productInOrder = await OrderItems.findOne({
+  let productInOrder = await OrderItems.findOne({
     where: {
       orderId: order.id,
       productId: req.body.productId
@@ -46,10 +46,12 @@ async function updateCartItems(req, order) {
       quantity: productInOrder.quantity + req.body.quantity
     })
   } else {
-    await order.addProduct(req.body.productId, {
+    productInOrder = await order.addProduct(req.body.productId, {
       through: {quantity: req.body.quantity}
     })
   }
+
+  return productInOrder
 }
 
 router.put('/cart', async (req, res, next) => {
@@ -72,8 +74,15 @@ router.put('/cart', async (req, res, next) => {
     if (!order) {
       order = await Orders.create(orderDefaults)
     }
-    updateCartItems(req, order)
-    res.status(200).send(order)
+
+    await updateCartItems(req, order)
+
+    const [orderProduct] = await order.getProducts({
+      where: {id: req.body.productId},
+      attributes: ['id', 'name', 'price', 'imageUrl']
+    })
+
+    res.status(200).send(orderProduct)
   } catch (err) {
     next(err)
   }
