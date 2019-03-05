@@ -77,12 +77,12 @@ router.put('/cart', async (req, res, next) => {
 
     await updateCartItems(req, order)
 
-    const [orderProduct] = await order.getProducts({
+    const [orderItem] = await order.getProducts({
       where: {id: req.body.productId},
       attributes: ['id', 'name', 'price', 'imageUrl']
     })
 
-    res.status(200).send(orderProduct)
+    res.status(200).send(orderItem)
   } catch (err) {
     next(err)
   }
@@ -158,11 +158,16 @@ router.put('/cart/:id', async (req, res, next) => {
       }
     })
 
-    const updatedItem = await item.update({
+    await item.update({
       quantity: req.body.quantity
     })
 
-    res.status(200).send(updatedItem)
+    const [orderItem] = await order.getProducts({
+      where: {id: req.params.id},
+      attributes: ['id', 'name', 'price', 'imageUrl']
+    })
+
+    res.status(200).send(orderItem)
   } catch (err) {
     next(err)
   }

@@ -55,15 +55,13 @@ export const getSingleProduct = id => {
 }
 
 export const updateCartInServer = item => async dispatch => {
-  const {data: updatedOrder} = await axios.put('/api/users/cart', item)
-  console.log('inside PUT thunk, received: ', updatedOrder)
-  dispatch(updateCart(updatedOrder.products))
+  const {data: updatedItem} = await axios.put('/api/users/cart', item)
+  dispatch(updateCart(updatedItem))
 }
 
 export const getCartItems = () => {
   return async dispatch => {
     const {data: cart} = await axios.get('/api/users/cart')
-    console.log('inside GET thunk, received: ', cart)
     if (cart) dispatch(gotCartItems(cart))
   }
 }
@@ -80,8 +78,11 @@ export const completeCheckout = (cartId, amt) => async dispatch => {
   dispatch(completedCheckout())
 }
 
-export const updateQuantity = (quantity, itemId) => async () => {
-  await axios.put(`/api/users/cart/${itemId}`, {quantity})
+export const updateQuantity = (quantity, itemId) => async dispatch => {
+  const {data: updatedItem} = await axios.put(`/api/users/cart/${itemId}`, {
+    quantity
+  })
+  dispatch(updateCart(updatedItem))
 }
 
 const initialState = {
@@ -97,23 +98,21 @@ export default function(state = initialState, action) {
       return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
       return {...state, singleProduct: action.product}
-    case UPDATE_CART:
-      return {...state, cart: [...state.cart, action.item]}
+    case UPDATE_CART: {
+      const newCart = state.cart.filter(item => item.id !== action.item.id)
+      return {...state, cart: [...newCart, action.item]}
+    }
     case GOT_CART_ITEMS:
       return {...state, cart: action.items, cartId: action.cartId}
     case REMOVE_ITEM: {
-      const currentCart = [...state.cart]
-      const filteredCart = currentCart.filter(item => {
-        return item.id !== Number(action.itemId)
-      })
+      const filteredCart = state.cart.filter(
+        item => item.id !== Number(action.itemId)
+      )
       return {...state, cart: filteredCart}
     }
     case COMPLETED_CHECKOUT:
       return {...state, cart: initialState.cart, cartId: initialState.cartId}
-    // case UPDATE_QUANTITY:
-    //   return {...state, cart: [...state.cart]}
     default:
       return state
   }
 }
-// add a ACTION to clear the cart upon checkout

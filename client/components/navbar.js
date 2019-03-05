@@ -55,7 +55,14 @@ class Navbar extends Component {
                     <i className="material-icons left prefix white-text">
                       shopping_cart
                     </i>
-                    <span>{cart.length}</span>
+                    <span>
+                      {cart.length
+                        ? cart.reduce(
+                            (total, item) => total + item.order_items.quantity,
+                            0
+                          )
+                        : null}
+                    </span>
                   </Link>
                 </li>
               </ul>
