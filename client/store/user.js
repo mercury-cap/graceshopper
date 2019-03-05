@@ -1,6 +1,7 @@
 /* eslint-disable max-params */
 import axios from 'axios'
 import history from '../history'
+import {assertContinueStatement} from 'babel-types'
 
 /**
  * ACTION TYPES
@@ -68,6 +69,18 @@ export const getAllUsers = () => {
       const response = await axios.get('/api/users')
       const users = response.data
       dispatch(gotAllUsers(users))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const editUser = (id, updatedUser) => {
+  return async dispatch => {
+    try {
+      const response = await axios.put(`/api/users/${id}`, updatedUser)
+      const user = response.data
+      dispatch(getUser(user))
     } catch (error) {
       console.log(error)
     }
