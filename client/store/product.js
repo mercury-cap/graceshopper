@@ -125,6 +125,8 @@ export default function(state = initialState, action) {
     }
     case COMPLETED_CHECKOUT:
       return {...state, cart: initialState.cart, cartId: initialState.cartId}
+    case GOT_CART:
+      return {...state, cart: initialState.cart}
     default:
       return state
   }

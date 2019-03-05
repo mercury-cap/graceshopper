@@ -25,9 +25,7 @@ class Cart extends Component {
   }
 
   render() {
-    const orderId = this.props.items
-      .map(order => order.order_items.orderId)
-      .pop()
+    const orderId = this.props.cart
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const itemsList = this.props.items.length ? (
       this.props.items.map(item => (
@@ -131,7 +129,8 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-  items: state.product.cart
+  items: state.product.cart,
+  cart: state.product.cartId
 })
 
 const mapDispatchToProps = dispatch => ({
