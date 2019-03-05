@@ -7,13 +7,19 @@ import {auth} from '../store'
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const {
+    name,
+    displayName,
+    handleSignupSubmit,
+    handleLoginSubmit,
+    error
+  } = props
 
   return (
     <div className="container">
       <div className="row">
-        <form onSubmit={handleSubmit} name={name}>
-          {displayName === 'Sign Up' ? (
+        {displayName === 'Sign Up' ? (
+          <form onSubmit={handleSignupSubmit} name={name}>
             <div>
               <div className="row">
                 <div className="input-field col s6">
@@ -82,53 +88,100 @@ const AuthForm = props => {
                 </div>
               </div>
             </div>
-          ) : null}
-          <div className="row">
-            <div className="input-field col s6">
-              <input
-                name="email"
-                type="email"
-                id="email"
-                required="required"
-                className="validate"
-              />
-              <label htmlFor="email">Email</label>
+            <div className="row">
+              <div className="input-field col s6">
+                <input
+                  name="email"
+                  type="email"
+                  id="email"
+                  required="required"
+                  className="validate"
+                />
+                <label htmlFor="email">Email</label>
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s6">
-              <input
-                name="password"
-                type="password"
-                id="password"
-                required="required"
-              />
-              <label htmlFor="password">Password</label>
+            <div className="row">
+              <div className="input-field col s6">
+                <input
+                  name="password"
+                  type="password"
+                  id="password"
+                  required="required"
+                />
+                <label htmlFor="password">Password</label>
+              </div>
             </div>
-          </div>
+            <div className="row">
+              <div className="col s3 orange-text">
+                <button
+                  className="waves-effect waves-light amber darken-4 btn"
+                  type="submit"
+                >
+                  {displayName}
+                </button>
+                {error && error.response && <div> {error.response.data} </div>}
+              </div>
+              <div className="col s3 orange-text">
+                <button
+                  type="submit"
+                  className="waves-effect waves-light amber darken-4 btn"
+                >
+                  <div>
+                    <a href="/auth/google">{displayName} with Google</a>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </form>
+        ) : (
+          <form onSubmit={handleLoginSubmit} name={name}>
+            <div className="row">
+              <div className="input-field col s6">
+                <input
+                  name="email"
+                  type="email"
+                  id="email"
+                  required="required"
+                  className="validate"
+                />
+                <label htmlFor="email">Email</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s6">
+                <input
+                  name="password"
+                  type="password"
+                  id="password"
+                  required="required"
+                />
+                <label htmlFor="password">Password</label>
+              </div>
+            </div>
 
-          <div className="row">
-            <div className="col s3 orange-text">
-              <button
-                className="waves-effect waves-light amber darken-4 btn"
-                type="submit"
-              >
-                {displayName}
-              </button>
-              {error && error.response && <div> {error.response.data} </div>}
+            <div className="row">
+              <div className="col s3 orange-text">
+                <button
+                  className="waves-effect waves-light amber darken-4 btn"
+                  type="submit"
+                >
+                  {displayName}
+                </button>
+                {error && error.response && <div> {error.response.data} </div>}
+              </div>
+              <div className="col s3 orange-text">
+                <button
+                  type="submit"
+                  className="waves-effect waves-light amber darken-4 btn"
+                >
+                  <div>
+                    <a href="/auth/google">{displayName} with Google</a>
+                  </div>
+                </button>
+              </div>
             </div>
-            <div className="col s3 orange-text">
-              <button
-                type="submit"
-                className="waves-effect waves-light amber darken-4 btn"
-              >
-                <div>
-                  <a href="/auth/google">{displayName} with Google</a>
-                </div>
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </div>
   )
@@ -159,7 +212,7 @@ const mapSignup = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleSubmit(evt) {
+    handleSignupSubmit(evt) {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
@@ -183,6 +236,13 @@ const mapDispatch = dispatch => {
           shippingZip
         )
       )
+    },
+    handleLoginSubmit(evt) {
+      evt.preventDefault()
+      const formName = evt.target.name
+      const email = evt.target.email.value
+      const password = evt.target.password.value
+      dispatch(auth(email, password, formName))
     }
   }
 }
@@ -196,6 +256,7 @@ export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleSignupSubmit: PropTypes.func.isRequired,
+  handleLoginSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
