@@ -37,18 +37,6 @@ const User = db.define('user', {
   shippingZip: {
     type: Sequelize.STRING
   },
-  billingAddress: {
-    type: Sequelize.STRING
-  },
-  billingCity: {
-    type: Sequelize.STRING
-  },
-  billingState: {
-    type: Sequelize.STRING
-  },
-  billingZip: {
-    type: Sequelize.STRING
-  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
