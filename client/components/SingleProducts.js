@@ -59,15 +59,15 @@ class SingleProduct extends Component {
               <p>Product type: {product.type}</p>
               <p>Price: {`$${(product.price / 100).toFixed(2)}`}</p>
               <p>Quantity: {this.state.quantity}</p>
-              <button type="button" onClick={this.add}>
-                +
-              </button>
               <button
                 type="button"
                 onClick={this.subtract}
                 disabled={this.state.quantity === 0}
               >
                 -
+              </button>
+              <button type="button" onClick={this.add}>
+                +
               </button>
               <button type="submit" onClick={this.handleSubmit}>
                 Add to Cart
