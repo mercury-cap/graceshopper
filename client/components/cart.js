@@ -59,7 +59,7 @@ class Cart extends Component {
               onClick={() => this.props.deleteItem(item.id)}
               value={item.id}
             >
-              REMOVE
+              Remove
             </button>
           </td>
         </tr>
@@ -85,6 +85,7 @@ class Cart extends Component {
 
           <tbody>{itemsList}</tbody>
         </table>
+
         {this.props.items.length ? (
           <button
             className="waves-effect waves-light amber darken-4 btn"

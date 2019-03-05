@@ -20,13 +20,13 @@ describe('Product routes', () => {
       expect(res.body).length.to.be.greaterThan(0)
     })
 
-//     it('GET /api/products/:productId', async () => {
-//       const res = await request(app)
-//         .get('/api/products/1')
-//         .expect(200)
+    it('GET /api/products/:productId', async () => {
+      const res = await request(app)
+        .get('/api/products/1')
+        .expect(200)
 
-//       expect(res.body).to.be.an('object')
-//       expect(res.body.name).to.be.equal('Sriracha Sauce')
-//     })
+      expect(res.body).to.be.an('object')
+      expect(res.body.name).to.be.equal('Sriracha Sauce')
+    })
   })
 })
