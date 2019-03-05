@@ -25,3 +25,8 @@ a {
   border-bottom: 1px solid orange !important;
   box-shadow: 0 1px 0 0 orange !important;
 }
+
+.cart-item a {
+  color: black;
+  text-decoration: underline;
+}

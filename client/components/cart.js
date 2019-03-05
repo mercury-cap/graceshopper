@@ -1,19 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {
-  getCartItems,
-  removeItem,
-  updateQuantity,
-  updateCartInServer
-} from '../store/product'
+import {getCartItems, removeItem, updateQuantity} from '../store/product'
 
 class Cart extends Component {
   constructor() {
     super()
-    this.state = {
-      items: []
-    }
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -25,15 +17,16 @@ class Cart extends Component {
     const quantity = event.target.value
     const productId = event.target.name
     this.props.updateQuantity(quantity, productId)
-    // this.props.updateQuantity({productId, quantity})
   }
 
   render() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const itemsList = this.props.items.length ? (
       this.props.items.map(item => (
-        <tr key={item.id}>
-          <td>{item.name}</td>
+        <tr className="cart-item" key={item.id}>
+          <td>
+            <Link to={`/products/${item.id}`}>{item.name}</Link>
+          </td>
           <td>${(item.price / 100).toFixed(2)}</td>
           <td>
             <select
@@ -108,7 +101,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCartItems: () => dispatch(getCartItems()),
   deleteItem: itemId => dispatch(removeItem(itemId)),
-  // updateQuantity: item => dispatch(updateCartInServer(item))
   updateQuantity: (quantity, itemId) =>
     dispatch(updateQuantity(quantity, itemId))
 })
