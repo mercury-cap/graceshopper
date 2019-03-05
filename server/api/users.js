@@ -26,6 +26,16 @@ router.get('/', isAuthenticated, async (req, res, next) => {
   }
 })
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+    const updatedUser = await user.update(req.body)
+    res.json(updatedUser)
+  } catch (err) {
+    next(err)
+  }
+})
+
 function isAuthenticated(req, res, next) {
   if (req.user && req.user.isAdmin === true) {
     return next()
