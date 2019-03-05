@@ -43,94 +43,93 @@ export class UserHome extends Component {
     const {email} = this.props
     let {user} = this.props
     return (
-      <div>
+      <div className="container">
         <h3>Welcome!</h3>
-        <div className="container">
-          <div className="row">
-            <form name={name} onSubmit={this.handleSubmit}>
-              <div>
-                <div className="row">
-                  <div className="input-field col s6">
-                    <input
-                      value={this.state.firstName}
-                      className="autocomplete"
-                      type="text"
-                      id="firstName"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s6">
-                    <input
-                      value={this.state.lastName}
-                      className="autocomplete"
-                      type="text"
-                      id="lastName"
-                      required="required"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s6">
-                    <input
-                      value={this.state.shippingAddress}
-                      className="autocomplete"
-                      type="text"
-                      id="shippingAddress"
-                      required="required"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s6">
-                    <input
-                      value={this.state.shippingCity}
-                      className="autocomplete"
-                      type="text"
-                      id="shippingCity"
-                      required="required"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s6">
-                    <input
-                      value={this.state.shippingState}
-                      className="autocomplete"
-                      type="text"
-                      id="shippingState"
-                      required="required"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="input-field col s6">
-                    <input
-                      value={this.state.shippingZip}
-                      className="autocomplete"
-                      type="text"
-                      id="shippingZip"
-                      required="required"
-                      onChange={this.handleChange}
-                    />
-                  </div>
+
+        <div className="row">
+          <form name={name} onSubmit={this.handleSubmit}>
+            <div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    value={this.state.firstName}
+                    className="autocomplete"
+                    type="text"
+                    id="firstName"
+                    onChange={this.handleChange}
+                  />
                 </div>
               </div>
-              <div className="col s3 orange-text">
-                <button
-                  type="submit"
-                  className="waves-effect waves-light amber darken-4 btn"
-                >
-                  Update
-                </button>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    value={this.state.lastName}
+                    className="autocomplete"
+                    type="text"
+                    id="lastName"
+                    required="required"
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
-            </form>
-          </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    value={this.state.shippingAddress}
+                    className="autocomplete"
+                    type="text"
+                    id="shippingAddress"
+                    required="required"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    value={this.state.shippingCity}
+                    className="autocomplete"
+                    type="text"
+                    id="shippingCity"
+                    required="required"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    value={this.state.shippingState}
+                    className="autocomplete"
+                    type="text"
+                    id="shippingState"
+                    required="required"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input
+                    value={this.state.shippingZip}
+                    className="autocomplete"
+                    type="text"
+                    id="shippingZip"
+                    required="required"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col s3 orange-text">
+              <button
+                type="submit"
+                className="waves-effect waves-light amber darken-4 btn"
+              >
+                Update
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     )
