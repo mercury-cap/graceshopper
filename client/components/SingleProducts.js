@@ -37,8 +37,8 @@ class SingleProduct extends Component {
     return (
       <div className="container" id="single-product">
         <div className="row">
-          <div className="col s6 center">
-            <img width="50%" src={this.props.product.imageUrl} />
+          <div className="col s6 center" id="product-image">
+            <img src={this.props.product.imageUrl} />
           </div>
           <div className="col s6">
             <div id="product-details">
