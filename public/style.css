@@ -35,6 +35,43 @@ a {
   text-decoration: underline;
 }
 
+#product-image img {
+  box-sizing: border-box;
+  width: 300px;
+  height: 500px;
+  object-fit: scale-down;
+  margin: 20px;
+  padding: 20px;
+  background-color: white;
+}
+
+#single-product .row {
+  display: flex;
+  align-items: center;
+}
+
+#single-product {
+  height: 100vh;
+}
+
+.cardimage img {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  object-fit: scale-down;
+}
+
+.cardimage {
+  box-sizing: border-box;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-content {
+  height: 100px;
+}
+
 #social-media-btns {
   margin-top: 20px;
 }

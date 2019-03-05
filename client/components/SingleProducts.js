@@ -48,9 +48,9 @@ class SingleProduct extends Component {
     return (
       <div className="container" id="single-product">
         <div className="row">
-          <div className="col s6 center">
+          <div className="col s6 center" id="product-image">
             <img width="50%" src={product.imageUrl} />
-          </div>
+      </div>
           <div className="col s6">
             <div id="product-details">
               <h2>{product.name}</h2>
