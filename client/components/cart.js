@@ -81,7 +81,7 @@ class Cart extends Component {
         </table>
         {this.props.items.length ? (
           <div>
-            <p>
+            <h3 id="cart-subtotal">
               <strong>Subtotal</strong>: $
               {(
                 this.props.items.reduce(
@@ -89,7 +89,7 @@ class Cart extends Component {
                   0
                 ) / 100
               ).toFixed(2)}
-            </p>
+            </h3>
             <Link to="/checkout">
               <button
                 className="waves-effect waves-light amber darken-4 btn"
