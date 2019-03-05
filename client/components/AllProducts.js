@@ -46,11 +46,13 @@ class AllProducts extends Component {
         <NavLink to={`/products/${product.id}`} key={product.id}>
           <div className="col s12 m6 l3">
             <div className="card small">
-              <div className="card-image">
+              <div className="cardimage">
                 <img src={product.imageUrl} />
               </div>
-              <div className="card-content">
-                <div className="orange-text">{product.name}</div>
+              <div className="card-content #f5f5f5 grey lighten-4 center-align">
+                <div className="black-text">
+                  <strong>{product.name}</strong>
+                </div>
               </div>
             </div>
           </div>
