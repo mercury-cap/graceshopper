@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {auth, authSignup} from '../store'
 
 /**
  * COMPONENT
@@ -224,7 +224,7 @@ const mapDispatch = dispatch => {
       const shippingState = evt.target.shippingState.value
       const shippingZip = evt.target.shippingZip.value
       dispatch(
-        auth(
+        authSignup(
           email,
           password,
           formName,

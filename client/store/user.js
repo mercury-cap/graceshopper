@@ -52,6 +52,41 @@ export const auth = (email, password, method) => async dispatch => {
   }
 }
 
+export const authSignup = (
+  email,
+  password,
+  method,
+  firstName,
+  lastName,
+  shippingAddress,
+  shippingCity,
+  shippingState,
+  shippingZip
+) => async dispatch => {
+  let res
+  try {
+    res = await axios.post(`/auth/${method}`, {
+      email,
+      password,
+      firstName,
+      lastName,
+      shippingAddress,
+      shippingCity,
+      shippingState,
+      shippingZip
+    })
+  } catch (authError) {
+    return dispatch(getUser({error: authError}))
+  }
+
+  try {
+    dispatch(getUser(res.data))
+    history.push('/home')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
+}
+
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
