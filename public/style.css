@@ -17,6 +17,10 @@ a {
   color: white;
 }
 
+.twitter-share-button {
+  color: black;
+}
+
 .input-field input:focus + label {
   color: orange !important;
 }
@@ -29,4 +33,8 @@ a {
 .cart-item a {
   color: black;
   text-decoration: underline;
+}
+
+#social-media-btns {
+  margin-top: 20px;
 }
