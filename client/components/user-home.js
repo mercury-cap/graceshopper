@@ -39,14 +39,32 @@ export class UserHome extends Component {
     this.props.editUser(this.props.user.id, this.state)
   }
 
+  // eslint-disable-next-line complexity
   render() {
-    const {email} = this.props
-    let {user} = this.props
+    const {
+      firstName,
+      lastName,
+      shippingAddress,
+      shippingCity,
+      shippingState,
+      shippingZip
+    } = this.state
+    const allFieldsAvail =
+      firstName &&
+      lastName &&
+      shippingAddress &&
+      shippingCity &&
+      shippingState &&
+      shippingZip
+
     return (
       <div className="container">
         <h3>Welcome!</h3>
         <p>
-          <strong>Edit your information below:</strong>
+          <strong>
+            {allFieldsAvail ? 'Edit your' : 'Please fill in the missing'}{' '}
+            information below:
+          </strong>
         </p>
 
         <div className="row">
@@ -55,72 +73,91 @@ export class UserHome extends Component {
               <div className="row">
                 <div className="input-field col s6">
                   <input
-                    value={this.state.firstName}
+                    value={firstName}
                     className="autocomplete"
                     type="text"
                     id="firstName"
+                    required="required"
                     onChange={this.handleChange}
                   />
+                  <label htmlFor="firstName">
+                    {firstName ? null : 'First Name'}
+                  </label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s6">
                   <input
-                    value={this.state.lastName}
+                    value={lastName}
                     className="autocomplete"
                     type="text"
                     id="lastName"
                     required="required"
                     onChange={this.handleChange}
                   />
+                  <label htmlFor="lastName">
+                    {lastName ? null : 'Last Name'}
+                  </label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s6">
                   <input
-                    value={this.state.shippingAddress}
+                    value={shippingAddress}
                     className="autocomplete"
                     type="text"
                     id="shippingAddress"
                     required="required"
                     onChange={this.handleChange}
                   />
+                  <label htmlFor="shippingAddress">
+                    {shippingAddress ? null : 'Street Address'}
+                  </label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s6">
                   <input
-                    value={this.state.shippingCity}
+                    value={shippingCity}
                     className="autocomplete"
                     type="text"
                     id="shippingCity"
                     required="required"
                     onChange={this.handleChange}
                   />
+                  <label htmlFor="shippingCity">
+                    {shippingCity ? null : 'City'}
+                  </label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s6">
                   <input
-                    value={this.state.shippingState}
+                    value={shippingState}
                     className="autocomplete"
                     type="text"
                     id="shippingState"
                     required="required"
                     onChange={this.handleChange}
                   />
+                  <label htmlFor="shippingState">
+                    {shippingState ? null : 'State'}
+                  </label>
                 </div>
               </div>
               <div className="row">
                 <div className="input-field col s6">
                   <input
-                    value={this.state.shippingZip}
+                    value={shippingZip}
                     className="autocomplete"
                     type="text"
                     id="shippingZip"
                     required="required"
                     onChange={this.handleChange}
                   />
+                  <label htmlFor="shippingZip">
+                    {shippingZip ? null : 'Zip Code'}
+                  </label>
                 </div>
               </div>
             </div>
