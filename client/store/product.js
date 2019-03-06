@@ -71,6 +71,18 @@ export const updateCartInServer = item => async dispatch => {
   dispatch(updateCart(updatedItem))
 }
 
+export const getOrders = userId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/users/orders/${userId}`)
+      const orders = response.data
+      dispatch(gotOrders(orders))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export const getCartItems = () => {
   return async dispatch => {
     const {data: cart} = await axios.get('/api/users/cart')
@@ -104,23 +116,12 @@ export const removeCart = cartId => {
   }
 }
 
-export const getOrders = userId => {
-  return async dispatch => {
-    try {
-      const response = await axios.get(`/api/users/orders/${userId}`)
-      const orders = response.data
-      dispatch(gotOrders(orders))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
-
 const initialState = {
   products: [],
   singleProduct: {},
   cart: [],
-  cartId: 0
+  cartId: 0,
+  orders: []
 }
 
 // eslint-disable-next-line complexity
@@ -147,7 +148,7 @@ export default function(state = initialState, action) {
     case GOT_CART:
       return {...state, cart: initialState.cart}
     case GOT_USER_ORDERS:
-      return {...state, cart: action.orders}
+      return {...state, orders: action.orders}
     default:
       return state
   }
