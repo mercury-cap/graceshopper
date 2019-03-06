@@ -77,6 +77,7 @@ export class UserHome extends Component {
                     className="autocomplete"
                     type="text"
                     id="firstName"
+                    required="required"
                     onChange={this.handleChange}
                   />
                   <label htmlFor="firstName">
