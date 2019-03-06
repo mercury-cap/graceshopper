@@ -18,31 +18,29 @@ class OrderHistory extends Component {
 
     const orderHistory = orders.length ? (
       orders.map(order => (
-        <div key={order.id}>
-          <h5>Order #: {order.id}</h5>
-
-          <p>Order Date: {order.createdAt.slice(0, 10)}</p>
-          <p>Order Total: ${(order.total / 100).toFixed(2)}</p>
-
+        <tbody key={order.id}>
+          <tr>
+            <h5>Order #: {order.id}</h5>
+          </tr>
+          <tr>Order Date: {order.createdAt.slice(0, 10)}</tr>
+          <tr>Order Total: ${(order.total / 100).toFixed(2)}</tr>
           {order.products.map(item => (
             <tr className="cart-item" key={item.name}>
               <td>
-                <p>
-                  <Link to={`/products/${item.order_items.productId}`}>
-                    {item.order_items.quantity} {item.name}
-                  </Link>
-                </p>
+                <Link to={`/products/${item.order_items.productId}`}>
+                  {item.order_items.quantity} {item.name}
+                </Link>
               </td>
-              <td>
-                <p>${(item.price / 100).toFixed(2)}/each</p>
-              </td>
+              <td>${(item.price / 100).toFixed(2)}/each</td>
             </tr>
           ))}
           <hr />
-        </div>
+        </tbody>
       ))
     ) : (
-      <p>You have not made a purchase.</p>
+      <tbody>
+        <tr>You have not made a purchase.</tr>
+      </tbody>
     )
     return (
       <div className="container">
@@ -50,9 +48,7 @@ class OrderHistory extends Component {
         <div>
           <h1>Order History</h1>
         </div>
-        <table>
-          <tbody>{orderHistory}</tbody>
-        </table>
+        <table>{orderHistory}</table>
       </div>
     )
   }
@@ -60,7 +56,6 @@ class OrderHistory extends Component {
 
 const mapStateToProps = state => ({
   items: state.product.orders
-  //   cartId: state.product.cartId
 })
 
 const mapDispatchToProps = dispatch => ({
