@@ -16,17 +16,29 @@ class OrderHistory extends Component {
   render() {
     console.log('cart:', this.props.items)
     console.log('state:', this.state)
+
     console.log(this.props.match.params.userId)
     const orders = this.props.items
+    console.log('total', orders)
     const orderHistory = orders.length ? (
       orders.map(order => (
         <div key={order.id}>
-          <p>Order #: {order.id}</p>
+          <h5>Order #: {order.id}</h5>
+
+          <p>Order Date: {order.createdAt.slice(0, 10)}</p>
+          <p>Order Total: ${(order.total / 100).toFixed(2)}</p>
+
           {order.products.map(item => (
-            <div key={item.name}>
-              <p>{item.name}</p>
-              <p>${(item.price / 100).toFixed(2)}</p>
-            </div>
+            <tr className="cart-item" key={item.name}>
+              <td>
+                <p>
+                  {item.order_items.quantity} {item.name}
+                </p>
+              </td>
+              <td>
+                <p>${(item.price / 100).toFixed(2)}/each</p>
+              </td>
+            </tr>
           ))}
           <hr />
         </div>
@@ -35,11 +47,25 @@ class OrderHistory extends Component {
       <p>You have not made a purchase.</p>
     )
     return (
-      <div>
+      <div className="container">
+        <div />
         <div>
-          <h2>Order History</h2>
+          <h1>Order History</h1>
         </div>
-        <div>{orderHistory}</div>
+        <table>
+          {/* <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Item Price</th>
+              <th>Item Quantity</th>
+              <th>Remove</th>
+            </tr>
+          </thead> */}
+
+          <tbody>{orderHistory}</tbody>
+        </table>
+
+        {/* <div>{orderHistory}</div> */}
       </div>
     )
   }
