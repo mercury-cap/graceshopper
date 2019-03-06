@@ -18,9 +18,14 @@ a {
 }
 
 nav {
-  /* position: fixed; */
+  position: fixed;
+  display: block;
+  z-index: 2;
 }
 
+.container {
+  padding-top: 70px;
+}
 .nav-wrapper {
   padding-right: 15px;
   padding-left: 15px;
@@ -75,6 +80,7 @@ nav {
   height: 200px;
   display: flex;
   justify-content: center;
+  padding: 10px;
 }
 
 .card-content {
@@ -109,4 +115,8 @@ nav {
 #heat-filter a {
   margin-left: 10px;
   color: black;
+}
+
+#country-filter select {
+  /* color: rgb(220, 220, 220); */
 }

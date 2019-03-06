@@ -71,7 +71,10 @@ class SingleProduct extends Component {
                 <strong>Heat Level</strong>: {getHeat(product.scoville)}
               </p>
               <p>
-                <strong>Scoville Heat Units (SHU)</strong>: {product.scoville}
+                <strong>Scoville Heat Units (SHU)</strong>:{' '}
+                {product.scoville
+                  ? Number(product.scoville).toLocaleString('en-US')
+                  : null}
               </p>
               <p>
                 <strong>Product type</strong>: {product.type}
