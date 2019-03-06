@@ -90,8 +90,6 @@ class AllProducts extends Component {
             handleHeatChange={this.handleHeatChange}
             handleCountryChange={this.handleCountryChange}
             heat={this.state.heat}
-            // country={this.state.country}
-            // productList={this.props.products}
             countryList={countryList}
           />
         </div>

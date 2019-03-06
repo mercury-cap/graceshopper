@@ -4,8 +4,6 @@ export default function Filters({
   handleHeatChange,
   handleCountryChange,
   heat,
-  // country,
-  // productList,
   countryList
 }) {
   const heatLevels = [
