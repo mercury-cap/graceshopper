@@ -44,16 +44,25 @@ class AllProducts extends Component {
 
     let filteredProducts = this.props.products
 
-    if (heat !== 'all') {
-      filteredProducts = this.props.products.filter(
-        product => getHeat(product.scoville) === heat
-      )
+    if (heat !== 'all' || country !== 'all') {
+      filteredProducts = this.props.products.filter(product => {
+        const heatOption = heat === 'all' ? 'all' : getHeat(product.scoville)
+        const countryOption = country === 'all' ? 'all' : product.country
+        return heatOption === heat && countryOption === country
+      })
     }
-    if (country !== 'all') {
-      filteredProducts = this.props.products.filter(
-        product => product.country === country
-      )
-    }
+
+    const countryList = this.props.products.reduce(
+      (uniqueCountries, product) => {
+        if (!uniqueCountries.includes(product.country)) {
+          uniqueCountries.push(product.country)
+          return uniqueCountries
+        } else {
+          return uniqueCountries
+        }
+      },
+      []
+    )
 
     const productCard = filteredProducts.map(product => {
       return (
@@ -81,14 +90,17 @@ class AllProducts extends Component {
             handleHeatChange={this.handleHeatChange}
             handleCountryChange={this.handleCountryChange}
             heat={this.state.heat}
-            country={this.state.country}
-            productList={this.props.products}
+            countryList={countryList}
           />
         </div>
         <div className="row">
           <div className="col s1" />
           <div className="col s10">
-            {productCard.length ? productCard : <p>No product</p>}
+            {productCard.length ? (
+              productCard
+            ) : (
+              <p>No products match your search.</p>
+            )}
           </div>
           <div className="col s1" />
         </div>

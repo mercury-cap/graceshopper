@@ -4,11 +4,8 @@ export default function Filters({
   handleHeatChange,
   handleCountryChange,
   heat,
-  country,
-  productList
+  countryList
 }) {
-  console.log('productList', productList)
-
   const heatLevels = [
     {
       name: 'mild',
@@ -23,15 +20,6 @@ export default function Filters({
       text: '🔥🔥🔥'
     }
   ]
-
-  const countries = productList.reduce((uniqueCountries, product) => {
-    if (!uniqueCountries.includes(product.country)) {
-      uniqueCountries.push(product.country)
-      return uniqueCountries
-    } else {
-      return uniqueCountries
-    }
-  }, [])
 
   return (
     <div className="row" id="filters">
@@ -69,9 +57,9 @@ export default function Filters({
           <option selected value="all">
             All Destinations
           </option>
-          {countries.map(countryUnique => (
-            <option key={countryUnique} value={countryUnique}>
-              {countryUnique}
+          {countryList.sort().map(country => (
+            <option key={country} value={country}>
+              {country}
             </option>
           ))}
         </select>
