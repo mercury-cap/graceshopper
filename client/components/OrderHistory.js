@@ -1,25 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getOrders} from '../store/product'
+import {Link} from 'react-router-dom'
 
 class OrderHistory extends Component {
   constructor() {
     super()
-    this.state = {cart: {}}
+    this.state = {}
   }
 
   componentDidMount = async () => {
     await this.props.getUserOrders(this.props.match.params.userId)
-    this.setState({cart: this.props.items})
   }
 
   render() {
-    console.log('cart:', this.props.items)
-    console.log('state:', this.state)
-
-    console.log(this.props.match.params.userId)
     const orders = this.props.items
-    console.log('total', orders)
+
     const orderHistory = orders.length ? (
       orders.map(order => (
         <div key={order.id}>
@@ -32,7 +28,9 @@ class OrderHistory extends Component {
             <tr className="cart-item" key={item.name}>
               <td>
                 <p>
-                  {item.order_items.quantity} {item.name}
+                  <Link to={`/products/${item.order_items.productId}`}>
+                    {item.order_items.quantity} {item.name}
+                  </Link>
                 </p>
               </td>
               <td>
@@ -53,19 +51,8 @@ class OrderHistory extends Component {
           <h1>Order History</h1>
         </div>
         <table>
-          {/* <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Item Price</th>
-              <th>Item Quantity</th>
-              <th>Remove</th>
-            </tr>
-          </thead> */}
-
           <tbody>{orderHistory}</tbody>
         </table>
-
-        {/* <div>{orderHistory}</div> */}
       </div>
     )
   }
