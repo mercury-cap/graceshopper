@@ -186,6 +186,44 @@ router.delete('/cart/:id', async (req, res, next) => {
 })
 
 router.delete('/cart/order/:id', async (req, res, next) => {
+  // const findQuery = req.user
+  //   ? {userId: req.user.id, status: 'in progress'}
+  //   : {sessionId: req.session.id, status: 'in progress'}
+
+  try {
+    // const order = await Orders.findOne({
+    //   where: findQuery
+    // })
+    await OrderItems.destroy({
+      where: {
+        orderId: req.params.id
+      }
+    })
+
+    res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/orders/:userId', async (req, res, next) => {
+  try {
+    let orders = await Orders.findAll({
+      where: {userId: req.params.userId, status: 'complete'},
+      include: [
+        {
+          model: Products,
+          attributes: ['id', 'name', 'price', 'imageUrl']
+        }
+      ]
+    })
+    res.status(200).json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/cart/:id', async (req, res, next) => {
   const findQuery = req.user
     ? {userId: req.user.id, status: 'in progress'}
     : {sessionId: req.session.id, status: 'in progress'}
@@ -194,13 +232,23 @@ router.delete('/cart/order/:id', async (req, res, next) => {
     const order = await Orders.findOne({
       where: findQuery
     })
-    await OrderItems.destroy({
+    const item = await OrderItems.findOne({
       where: {
-        orderId: req.params.id
+        orderId: order.id,
+        productId: req.params.id
       }
     })
 
-    res.status(204).end()
+    await item.update({
+      quantity: req.body.quantity
+    })
+
+    const [orderItem] = await order.getProducts({
+      where: {id: req.params.id},
+      attributes: ['id', 'name', 'price', 'imageUrl']
+    })
+
+    res.status(200).send(orderItem)
   } catch (err) {
     next(err)
   }
