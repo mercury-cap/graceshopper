@@ -54,7 +54,40 @@ async function updateCartItems(req, order) {
   return productInOrder
 }
 
+router.put('/cart/:id', async (req, res, next) => {
+  console.log('INSIDE CART/ID ROUTE')
+  const findQuery = req.user
+    ? {userId: req.user.id, status: 'in progress'}
+    : {sessionId: req.session.id, status: 'in progress'}
+
+  try {
+    const order = await Orders.findOne({
+      where: findQuery
+    })
+    const item = await OrderItems.findOne({
+      where: {
+        orderId: order.id,
+        productId: req.params.id
+      }
+    })
+
+    await item.update({
+      quantity: req.body.quantity
+    })
+
+    const [orderItem] = await order.getProducts({
+      where: {id: req.params.id},
+      attributes: ['id', 'name', 'price', 'imageUrl']
+    })
+
+    res.status(200).send(orderItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/cart', async (req, res, next) => {
+  console.log('INSIDE /CART ROUTE')
   const userId = req.user ? req.user.id : null
 
   const orderDefaults = {
@@ -83,6 +116,16 @@ router.put('/cart', async (req, res, next) => {
     })
 
     res.status(200).send(orderItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+    const updatedUser = await user.update(req.body)
+    res.json(updatedUser)
   } catch (err) {
     next(err)
   }
@@ -210,3 +253,4 @@ router.put('/cart/:id', async (req, res, next) => {
     next(err)
   }
 })
+

@@ -43,31 +43,57 @@ class SingleProduct extends Component {
   }
 
   render() {
-    console.log('Props: ', this.props)
-    const {product, match} = this.props
+    const {product} = this.props
+
+    const getHeat = scoville => {
+      if (scoville <= 10000) {
+        return '🔥'
+      } else if (scoville <= 50000) {
+        return '🔥🔥'
+      } else {
+        return '🔥🔥🔥'
+      }
+    }
+
     return (
       <div className="container" id="single-product">
         <div className="row">
-          <div className="col s6 center">
+          <div className="col s6 center" id="product-image">
             <img width="50%" src={product.imageUrl} />
           </div>
           <div className="col s6">
             <div id="product-details">
               <h2>{product.name}</h2>
-              <p>Origin: {product.country}</p>
-              <p>Scoville Heat Units (SHU): {product.scoville}</p>
-              <p>Product type: {product.type}</p>
-              <p>Price: {`$${(product.price / 100).toFixed(2)}`}</p>
-              <p>Quantity: {this.state.quantity}</p>
-              <button type="button" onClick={this.add}>
-                +
-              </button>
+              <p>
+                <strong>Origin</strong>: {product.country}
+              </p>
+              <p>
+                <strong>Heat Level</strong>: {getHeat(product.scoville)}
+              </p>
+              <p>
+                <strong>Scoville Heat Units (SHU)</strong>:{' '}
+                {product.scoville
+                  ? Number(product.scoville).toLocaleString('en-US')
+                  : null}
+              </p>
+              <p>
+                <strong>Product type</strong>: {product.type}
+              </p>
+              <p>
+                <strong>Price</strong>: {`$${(product.price / 100).toFixed(2)}`}
+              </p>
+              <p>
+                <strong>Quantity</strong>: {this.state.quantity}
+              </p>
               <button
                 type="button"
                 onClick={this.subtract}
                 disabled={this.state.quantity === 0}
               >
                 -
+              </button>
+              <button type="button" onClick={this.add}>
+                +
               </button>
               <button type="submit" onClick={this.handleSubmit}>
                 Add to Cart

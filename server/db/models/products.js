@@ -7,7 +7,7 @@ const Products = db.define('products', {
     allowNull: false
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   country: {
