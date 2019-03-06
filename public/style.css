@@ -17,6 +17,11 @@ a {
   color: white;
 }
 
+.nav-wrapper {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .twitter-share-button {
   color: black;
 }
@@ -83,6 +88,7 @@ a {
 #filters {
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 
 #country-filter {
@@ -96,10 +102,7 @@ a {
   border-right: 1px solid rgb(148, 147, 147);
 }
 
-.container a {
-  margin-left: 10px;
-}
-
 #heat-filter a {
+  margin-left: 10px;
   color: black;
 }

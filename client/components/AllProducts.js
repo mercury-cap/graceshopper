@@ -17,23 +17,18 @@ class AllProducts extends Component {
   }
 
   handleHeatChange = e => {
-    console.log('in heat change handler: ', e.target.name)
-
     this.setState({
       heat: e.target.name
     })
   }
 
   handleCountryChange = e => {
-    console.log('in country change handler: ', e.target.value)
     this.setState({
       country: e.target.value
     })
   }
 
   render() {
-    console.log('render, new state: ', this.state)
-
     let productList = this.props.products || []
     const {heat, country} = this.state
 
@@ -46,6 +41,21 @@ class AllProducts extends Component {
         return 'insane'
       }
     }
+
+    const heatLevels = [
+      {
+        name: 'mild',
+        text: '🔥'
+      },
+      {
+        name: 'hot',
+        text: '🔥🔥'
+      },
+      {
+        name: 'insane',
+        text: '🔥🔥🔥'
+      }
+    ]
 
     const countries = productList.reduce((uniqueCountries, product) => {
       if (!uniqueCountries.includes(product.country)) {
@@ -87,9 +97,8 @@ class AllProducts extends Component {
     return (
       <div>
         <div className="container">
-          <p>Filter by:</p>
           <div className="row" id="filters">
-            <div id="heat-filter" className="col s6">
+            <div id="heat-filter" className="col s12">
               <span className="filter-cat">
                 <strong>HEAT</strong>
               </span>
@@ -100,27 +109,16 @@ class AllProducts extends Component {
               >
                 All Levels
               </a>
-              <a
-                className="waves-effect waves-light btn #424242 grey darken-3"
-                name="mild"
-                onClick={this.handleHeatChange}
-              >
-                🔥
-              </a>
-              <a
-                className="waves-effect waves-light btn #424242 grey darken-3"
-                name="hot"
-                onClick={this.handleHeatChange}
-              >
-                🔥🔥
-              </a>
-              <a
-                className="waves-effect waves-light btn #424242 grey darken-3"
-                name="insane"
-                onClick={this.handleHeatChange}
-              >
-                🔥🔥🔥
-              </a>
+              {heatLevels.map(level => (
+                <a
+                  key={level.name}
+                  className="waves-effect waves-light btn #424242 grey darken-3"
+                  name={level.name}
+                  onClick={this.handleHeatChange}
+                >
+                  {level.text}
+                </a>
+              ))}
             </div>
             <div id="country-filter" className="col s6">
               <span className="filter-cat">
