@@ -7,7 +7,8 @@ class AllProducts extends Component {
   constructor() {
     super()
     this.state = {
-      heat: 'all'
+      heat: 'all',
+      country: 'all'
     }
   }
 
@@ -16,13 +17,24 @@ class AllProducts extends Component {
   }
 
   handleHeatChange = e => {
-    console.log('Event target: ', typeof e.target.name)
     this.setState({
       heat: e.target.name
     })
   }
 
+  handleCountryChange = e => {
+    console.log('in country change handler: ', e.target.value)
+    this.setState({
+      country: e.target.value
+    })
+  }
+
   render() {
+    console.log('render, new state: ', this.state)
+
+    let productList = this.props.products || []
+    const {heat, country} = this.state
+
     const getHeat = scoville => {
       if (scoville <= 10000) {
         return 'mild'
@@ -33,13 +45,22 @@ class AllProducts extends Component {
       }
     }
 
-    let productList = this.props.products || []
-    const {heat} = this.state
+    const countries = productList.reduce((uniqueCountries, product) => {
+      if (!uniqueCountries.includes(product.country)) {
+        uniqueCountries.push(product.country)
+        return uniqueCountries
+      } else {
+        return uniqueCountries
+      }
+    }, [])
 
     if (heat !== 'all') {
       productList = productList.filter(
         product => getHeat(product.scoville) === heat
       )
+    }
+    if (country !== 'all') {
+      productList = productList.filter(product => product.country === country)
     }
 
     const productCard = productList.map(product => {
@@ -65,10 +86,10 @@ class AllProducts extends Component {
       <div>
         <div className="container">
           <p>Filter by:</p>
-          <div id="filters">
-            <div>
+          <div className="row" id="filters">
+            <div id="heat-filter" className="col s6">
               <span className="filter-cat">
-                <strong>Heat</strong>
+                <strong>HEAT</strong>
               </span>
               <a
                 className="waves-effect waves-light btn #424242 grey darken-3"
@@ -91,28 +112,34 @@ class AllProducts extends Component {
               >
                 🔥🔥🔥
               </a>
+              <a className="waves-effect waves-light btn-small">All</a>
             </div>
-            <div id="country-filter">
+            <div id="country-filter" className="col s6">
               <span className="filter-cat">
-                <strong>Country of Origin</strong>
+                <strong>ORIGIN</strong>
               </span>
               <select
                 onChange={this.handleCountryChange}
                 className="browser-default"
               >
-                <option value="all">All</option>
-                <option value="mild">🔥</option>
-                <option value="hot">🔥🔥</option>
-                <option value="insane">🔥🔥🔥</option>
+                <option selected value="all">
+                  Choose A Destination
+                </option>
+                {countries.map(countryUnique => (
+                  <option key={countryUnique} value={countryUnique}>
+                    {countryUnique}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
         </div>
-
-        <div className="container">
-          <div className="row">
+        <div className="row">
+          <div className="col s1" />
+          <div className="col s10">
             {productCard.length ? productCard : <p>No product</p>}
           </div>
+          <div className="col s1" />
         </div>
       </div>
     )
