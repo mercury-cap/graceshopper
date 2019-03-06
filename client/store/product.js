@@ -71,18 +71,6 @@ export const updateCartInServer = item => async dispatch => {
   dispatch(updateCart(updatedItem))
 }
 
-export const getOrders = userId => {
-  return async dispatch => {
-    try {
-      const response = await axios.get(`/api/users/orders/${userId}`)
-      const orders = response.data
-      dispatch(gotOrders(orders))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
-
 export const getCartItems = () => {
   return async dispatch => {
     const {data: cart} = await axios.get('/api/users/cart')
@@ -113,6 +101,18 @@ export const removeCart = cartId => {
   return async dispatch => {
     await axios.delete(`/api/users/cart/order/${cartId}`)
     dispatch(gotCart())
+  }
+}
+
+export const getOrders = userId => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/api/users/orders/${userId}`)
+      const orders = response.data
+      dispatch(gotOrders(orders))
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

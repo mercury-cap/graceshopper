@@ -28,10 +28,11 @@ class OrderHistory extends Component {
               <p>${(item.price / 100).toFixed(2)}</p>
             </div>
           ))}
+          <hr />
         </div>
       ))
     ) : (
-      <p>Empty Cart</p>
+      <p>You have not made a purchase.</p>
     )
     return (
       <div>
@@ -39,18 +40,6 @@ class OrderHistory extends Component {
           <h2>Order History</h2>
         </div>
         <div>{orderHistory}</div>
-        {/* {orders.length}
-        {orders.map(order => (
-          <div key={order.id}>
-            <p>Order #: {order.id}</p>
-            {order.products.map(item => (
-              <div key={item.name}>
-                <p>{item.name}</p>
-                <p>${(item.price / 100).toFixed(2)}</p>
-              </div>
-            ))}
-          </div>
-        ))} */}
       </div>
     )
   }

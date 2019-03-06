@@ -166,7 +166,7 @@ router.delete('/cart/order/:id', async (req, res, next) => {
 router.get('/orders/:userId', async (req, res, next) => {
   try {
     let orders = await Orders.findAll({
-      where: {sessionId: req.session.id, status: 'complete'},
+      where: {userId: req.params.userId, status: 'complete'},
       include: [
         {
           model: Products,
