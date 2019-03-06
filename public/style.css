@@ -79,3 +79,27 @@ a {
 #product-details h2 {
   font-family: 'Special Elite', cursive;
 }
+
+#filters {
+  display: flex;
+  align-items: center;
+}
+
+#country-filter {
+  display: flex;
+  align-items: center;
+}
+
+.filter-cat strong {
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid rgb(148, 147, 147);
+}
+
+.container a {
+  margin-left: 10px;
+}
+
+#heat-filter a {
+  color: black;
+}
