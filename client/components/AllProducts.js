@@ -17,6 +17,8 @@ class AllProducts extends Component {
   }
 
   handleHeatChange = e => {
+    console.log('in heat change handler: ', e.target.name)
+
     this.setState({
       heat: e.target.name
     })
@@ -92,6 +94,13 @@ class AllProducts extends Component {
                 <strong>HEAT</strong>
               </span>
               <a
+                className="waves-effect waves-light btn-small"
+                name="all"
+                onClick={this.handleHeatChange}
+              >
+                All Levels
+              </a>
+              <a
                 className="waves-effect waves-light btn #424242 grey darken-3"
                 name="mild"
                 onClick={this.handleHeatChange}
@@ -112,7 +121,6 @@ class AllProducts extends Component {
               >
                 🔥🔥🔥
               </a>
-              <a className="waves-effect waves-light btn-small">All</a>
             </div>
             <div id="country-filter" className="col s6">
               <span className="filter-cat">
@@ -123,7 +131,7 @@ class AllProducts extends Component {
                 className="browser-default"
               >
                 <option selected value="all">
-                  Choose A Destination
+                  All Destinations
                 </option>
                 {countries.map(countryUnique => (
                   <option key={countryUnique} value={countryUnique}>
