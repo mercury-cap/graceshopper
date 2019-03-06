@@ -23,7 +23,9 @@ class OrderHistory extends Component {
             <h5>Order #: {order.id}</h5>
           </tr>
           <tr>Order Date: {order.createdAt.slice(0, 10)}</tr>
-          <tr>Order Total: ${(order.total / 100).toFixed(2)}</tr>
+          <tr>
+            Order Total: ${(order.total / 100).toFixed(2)} (with shipping & tax)
+          </tr>
           {order.products.map(item => (
             <tr className="cart-item" key={item.name}>
               <td>
@@ -31,7 +33,7 @@ class OrderHistory extends Component {
                   {item.order_items.quantity} {item.name}
                 </Link>
               </td>
-              <td>${(item.price / 100).toFixed(2)}/each</td>
+              <td>${(item.order_items.price / 100).toFixed(2)}/each</td>
             </tr>
           ))}
           <hr />
