@@ -61,6 +61,7 @@ export const getSingleProduct = id => {
 }
 
 export const updateCartInServer = item => async dispatch => {
+  console.log(item)
   const {data: updatedItem} = await axios.put('/api/users/cart', item)
   dispatch(updateCart(updatedItem))
 }
