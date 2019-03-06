@@ -17,6 +17,20 @@ a {
   color: white;
 }
 
+nav {
+  position: fixed;
+  display: block;
+  z-index: 2;
+}
+
+.container {
+  padding-top: 70px;
+}
+.nav-wrapper {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 .twitter-share-button {
   color: black;
 }
@@ -66,6 +80,7 @@ a {
   height: 200px;
   display: flex;
   justify-content: center;
+  padding: 10px;
 }
 
 .card-content {
@@ -83,6 +98,7 @@ a {
 #filters {
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 
 #country-filter {
@@ -96,10 +112,11 @@ a {
   border-right: 1px solid rgb(148, 147, 147);
 }
 
-.container a {
+#heat-filter a {
   margin-left: 10px;
+  color: black;
 }
 
-#heat-filter a {
-  color: black;
+#country-filter select {
+  /* color: rgb(220, 220, 220); */
 }
