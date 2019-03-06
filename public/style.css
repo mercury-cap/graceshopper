@@ -17,6 +17,10 @@ a {
   color: white;
 }
 
+nav {
+  /* position: fixed; */
+}
+
 .nav-wrapper {
   padding-right: 15px;
   padding-left: 15px;

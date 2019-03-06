@@ -112,7 +112,11 @@ class AllProducts extends Component {
               {heatLevels.map(level => (
                 <a
                   key={level.name}
-                  className="waves-effect waves-light btn #424242 grey darken-3"
+                  className={
+                    heat === level.name
+                      ? 'waves-effect waves-light btn orange'
+                      : 'waves-effect waves-light btn #424242 grey darken-3'
+                  }
                   name={level.name}
                   onClick={this.handleHeatChange}
                 >
